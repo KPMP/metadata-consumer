@@ -431,7 +431,7 @@
     <created_date>2020/01/03 12:12:32.211</created_date>
     <modified_user>-</modified_user>
     <modified_date>2020/01/03 12:12:32.211</modified_date>
-    <key_for_session_key />
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -469,8 +469,8 @@
     </hop>
   </order>
   <step>
-    <name>Select values</name>
-    <type>SelectValues</type>
+    <name>Get variables</name>
+    <type>GetVariable</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -481,14 +481,29 @@
     </partitioning>
     <fields>
       <field>
-        <name>Associated File Name:</name>
-        <rename>files</rename>
+        <name>baseDirectory</name>
+        <variable>${baseDirectory}</variable>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
       </field>
       <field>
-        <name>Associated File Name (Paired End):</name>
-        <rename>paired_end_files</rename>
+        <name>packageDirectory</name>
+        <variable>${packageDirectory}</variable>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
       </field>
-      <select_unspecified>N</select_unspecified>
     </fields>
     <attributes />
     <cluster_schema />
@@ -499,64 +514,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Text file output</name>
-    <type>TextFileOutput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <separator>;</separator>
-    <enclosure>"</enclosure>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>Y</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding>UTF-8</encoding>
-    <endedLine />
-    <fileNameInField>N</fileNameInField>
-    <fileNameField />
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name>/Users/rlreamy/git/kpmp/metadata-consumer/test</name>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>txt</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format />
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery />
-    </file>
-    <fields>
-    </fields>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>864</xloc>
+      <xloc>64</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1127,7 +1085,7 @@
     <line_number_files_destination_directory />
     <line_number_files_extension>line</line_number_files_extension>
     <shortFileFieldName />
-    <pathFieldName />
+    <pathFieldName>path</pathFieldName>
     <hiddenFieldName />
     <lastModificationTimeFieldName />
     <uriNameFieldName />
@@ -1151,8 +1109,8 @@
     </GUI>
   </step>
   <step>
-    <name>Get variables</name>
-    <type>GetVariable</type>
+    <name>Select values</name>
+    <type>SelectValues</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -1163,29 +1121,18 @@
     </partitioning>
     <fields>
       <field>
-        <name>baseDirectory</name>
-        <variable>${baseDirectory}</variable>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <name>Associated File Name:</name>
+        <rename>files</rename>
       </field>
       <field>
-        <name>packageDirectory</name>
-        <variable>${packageDirectory}</variable>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
+        <name>Associated File Name (Paired End):</name>
+        <rename>paired_end_files</rename>
       </field>
+      <field>
+        <name>path</name>
+        <rename />
+      </field>
+      <select_unspecified>N</select_unspecified>
     </fields>
     <attributes />
     <cluster_schema />
@@ -1196,7 +1143,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>64</xloc>
+      <xloc>544</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1242,7 +1189,7 @@
     </GUI>
   </step>
   <step>
-    <name>Text file output 2</name>
+    <name>Text file output</name>
     <type>TextFileOutput</type>
     <description />
     <distribute>Y</distribute>
@@ -1256,17 +1203,17 @@
     <enclosure>"</enclosure>
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>Y</header>
+    <header>N</header>
     <footer>N</footer>
     <format>DOS</format>
     <compression>None</compression>
-    <encoding />
+    <encoding>UTF-8</encoding>
     <endedLine />
     <fileNameInField>N</fileNameInField>
     <fileNameField />
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>/Users/rlreamy/git/kpmp/metadata-consumer/parameters</name>
+      <name>fileNames</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>txt</extention>
@@ -1293,8 +1240,65 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
-      <yloc>240</yloc>
+      <xloc>672</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Text file output 2</name>
+    <type>TextFileOutput</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <separator>/</separator>
+    <enclosure />
+    <enclosure_forced>N</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>DOS</format>
+    <compression>None</compression>
+    <encoding />
+    <endedLine />
+    <fileNameInField>N</fileNameInField>
+    <fileNameField />
+    <create_parent_folder>Y</create_parent_folder>
+    <file>
+      <name>path</name>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>txt</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format />
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery />
+    </file>
+    <fields>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>288</xloc>
+      <yloc>176</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
