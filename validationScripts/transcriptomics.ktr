@@ -438,18 +438,8 @@
   </notepads>
   <order>
     <hop>
-      <from>Select values</from>
-      <to>Text file output</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Get variables</from>
       <to>Set variables</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Set variables</from>
-      <to>Text file output 2</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -464,7 +454,52 @@
     </hop>
     <hop>
       <from>Microsoft Excel input</from>
-      <to>Select values</to>
+      <to>Get Files And Path</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Get Files And Path</from>
+      <to>Make files one per row</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Get Files And Path</from>
+      <to>Make paired end fiels one per row</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Make files one per row</from>
+      <to>Join all files into one field</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Join all files into one field</from>
+      <to>Get path and filenames</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Make paired end fiels one per row</from>
+      <to>Join all files into one field</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Calculator</from>
+      <to>Select values 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values 3</from>
+      <to>Text file output</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Get path and filenames</from>
+      <to>Add constants</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Add constants</from>
+      <to>Calculator</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -1103,16 +1138,16 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
+      <xloc>288</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select values</name>
+    <name>Get Files And Path</name>
     <type>SelectValues</type>
     <description />
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution />
     <copies>1</copies>
     <partitioning>
@@ -1122,7 +1157,7 @@
     <fields>
       <field>
         <name>Associated File Name:</name>
-        <rename>files</rename>
+        <rename>associated_files</rename>
       </field>
       <field>
         <name>Associated File Name (Paired End):</name>
@@ -1143,7 +1178,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>544</xloc>
+      <xloc>416</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1183,7 +1218,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
+      <xloc>160</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1240,14 +1275,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>672</xloc>
+      <xloc>1232</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Text file output 2</name>
-    <type>TextFileOutput</type>
+    <name>Make files one per row</name>
+    <type>SplitFieldToRows3</type>
     <description />
     <distribute>Y</distribute>
     <custom_distribution />
@@ -1256,7 +1291,71 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <separator>/</separator>
+    <splitfield>associated_files</splitfield>
+    <delimiter>;</delimiter>
+    <newfield>files</newfield>
+    <rownum>N</rownum>
+    <rownum_field />
+    <resetrownumber>Y</resetrownumber>
+    <delimiter_is_regex>N</delimiter_is_regex>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>16</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Make paired end fiels one per row</name>
+    <type>SplitFieldToRows3</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <splitfield>paired_end_files</splitfield>
+    <delimiter>;</delimiter>
+    <newfield>files</newfield>
+    <rownum>N</rownum>
+    <rownum_field />
+    <resetrownumber>Y</resetrownumber>
+    <delimiter_is_regex>N</delimiter_is_regex>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>112</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Join all files into one field</name>
+    <type>ConcatFields</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <separator>;</separator>
     <enclosure />
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
@@ -1270,7 +1369,7 @@
     <fileNameField />
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>path</name>
+      <name>file</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>txt</extention>
@@ -1284,9 +1383,74 @@
       <add_to_result_filenames>Y</add_to_result_filenames>
       <pad>N</pad>
       <fast_dump>N</fast_dump>
-      <splitevery />
+      <splitevery>0</splitevery>
     </file>
     <fields>
+      <field>
+        <name>associated_files</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif />
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>paired_end_files</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif />
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <ConcatFields>
+      <targetFieldName>all_files</targetFieldName>
+      <targetFieldLength>0</targetFieldLength>
+      <removeSelectedFields>N</removeSelectedFields>
+    </ConcatFields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>672</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Get path and filenames</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>N</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>path</name>
+        <rename />
+      </field>
+      <field>
+        <name>all_files</name>
+        <rename />
+      </field>
+      <select_unspecified>N</select_unspecified>
     </fields>
     <attributes />
     <cluster_schema />
@@ -1297,8 +1461,120 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>288</xloc>
-      <yloc>176</yloc>
+      <xloc>832</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Calculator</name>
+    <type>Calculator</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <failIfNoFile>Y</failIfNoFile>
+    <calculation>
+      <field_name>full_path</field_name>
+      <calc_type>ADD3</calc_type>
+      <field_a>path</field_a>
+      <field_b>separator</field_b>
+      <field_c>all_files</field_c>
+      <value_type>String</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <remove>N</remove>
+      <conversion_mask />
+      <decimal_symbol />
+      <grouping_symbol />
+      <currency_symbol />
+    </calculation>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1024</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Select values 3</name>
+    <type>SelectValues</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>full_path</name>
+        <rename />
+      </field>
+      <select_unspecified>N</select_unspecified>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1136</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Add constants</name>
+    <type>Constant</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <fields>
+      <field>
+        <name>separator</name>
+        <type>String</type>
+        <format />
+        <currency />
+        <decimal />
+        <group />
+        <nullif>/</nullif>
+        <length>-1</length>
+        <precision>-1</precision>
+        <set_empty_string>N</set_empty_string>
+      </field>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>960</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
