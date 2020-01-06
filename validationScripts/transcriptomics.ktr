@@ -459,7 +459,7 @@
     </hop>
     <hop>
       <from>Calculator</from>
-      <to>Select values 3</to>
+      <to>send full path</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -468,17 +468,7 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Calculator 2</from>
-      <to>Select values 3 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Add separator</from>
-      <to>Calculator 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Select values 3</from>
+      <from>send full path</from>
       <to>File exists</to>
       <enabled>Y</enabled>
     </hop>
@@ -498,26 +488,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Select values 3 2</from>
-      <to>File exists 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>File exists 2</from>
-      <to>Filter rows 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Filter rows 2</from>
-      <to>Text file output</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Filter rows 2</from>
-      <to>Text file output 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Microsoft Excel input</from>
       <to>Get Files And Path (paired end)</to>
       <enabled>Y</enabled>
@@ -529,7 +499,7 @@
     </hop>
     <hop>
       <from>Get Files And Path (paired end)</from>
-      <to>Add separator</to>
+      <to>Add constants</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -1204,7 +1174,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>416</xloc>
+      <xloc>496</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1285,13 +1255,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>704</xloc>
+      <xloc>784</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Select values 3</name>
+    <name>send full path</name>
     <type>SelectValues</type>
     <description />
     <distribute>Y</distribute>
@@ -1317,7 +1287,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>816</xloc>
+      <xloc>896</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1356,120 +1326,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>592</xloc>
+      <xloc>672</xloc>
       <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Calculator 2</name>
-    <type>Calculator</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <failIfNoFile>Y</failIfNoFile>
-    <calculation>
-      <field_name>full_path</field_name>
-      <calc_type>ADD3</calc_type>
-      <field_a>path</field_a>
-      <field_b>separator</field_b>
-      <field_c>all_files</field_c>
-      <value_type>String</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask />
-      <decimal_symbol />
-      <grouping_symbol />
-      <currency_symbol />
-    </calculation>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>704</xloc>
-      <yloc>144</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values 3 2</name>
-    <type>SelectValues</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>full_path</name>
-        <rename />
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>816</xloc>
-      <yloc>144</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Add separator</name>
-    <type>Constant</type>
-    <description />
-    <distribute>N</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fields>
-      <field>
-        <name>separator</name>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <nullif>/</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
-    </fields>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>592</xloc>
-      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1504,7 +1362,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>416</xloc>
+      <xloc>496</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1534,7 +1392,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>912</xloc>
+      <xloc>992</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1578,7 +1436,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>992</xloc>
+      <xloc>1088</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1635,7 +1493,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1104</xloc>
+      <xloc>1216</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1692,82 +1550,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1120</xloc>
+      <xloc>1216</xloc>
       <yloc>144</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>File exists 2</name>
-    <type>FileExists</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <filenamefield>full_path</filenamefield>
-    <resultfieldname>result</resultfieldname>
-    <includefiletype>N</includefiletype>
-    <filetypefieldname />
-    <addresultfilenames>N</addresultfilenames>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>928</xloc>
-      <yloc>144</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Filter rows 2</name>
-    <type>FilterRows</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <send_true_to>Text file output</send_true_to>
-    <send_false_to>Text file output 3</send_false_to>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>result</leftvalue>
-        <function>=</function>
-        <rightvalue />
-        <value>
-          <name>constant</name>
-          <type>Boolean</type>
-          <text>Y</text>
-          <length>-1</length>
-          <precision>-1</precision>
-          <isnull>N</isnull>
-          <mask />
-        </value>
-      </condition>
-    </compare>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1008</xloc>
-      <yloc>208</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
