@@ -463,11 +463,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Set separator</from>
-      <to>Create full path</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>select full path</from>
       <to>File exists</to>
       <enabled>Y</enabled>
@@ -475,21 +470,6 @@
     <hop>
       <from>Read Metadata</from>
       <to>Get Files And Path (paired end)</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Get Files And Path</from>
-      <to>Set separator</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Switch / case</from>
-      <to>SUCCESS</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Switch / case</from>
-      <to>FAILURE</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -503,8 +483,53 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>Get Files And Path</from>
+      <to>Remove blanks 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Remove blanks 2</from>
+      <to>Set separator</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows</from>
+      <to>Success Path</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows</from>
+      <to>Failure Path</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Set separator</from>
+      <to>Create full path</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Failure Path</from>
+      <to>Failure Message</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Success Path</from>
+      <to>Success message</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Success message</from>
+      <to>SUCCESS</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Failure Message</from>
+      <to>FAILURE</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>File exists</from>
-      <to>Text file output</to>
+      <to>Filter rows</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -560,14 +585,14 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <applicationType>TEXT PLAIN</applicationType>
+    <applicationType>JSON</applicationType>
     <method>POST</method>
     <url>http://state-spring:3060/v1/state/host/localhost</url>
     <urlInField>N</urlInField>
     <dynamicMethod>N</dynamicMethod>
     <methodFieldName />
     <urlField />
-    <bodyField />
+    <bodyField>requestBody</bodyField>
     <httpLogin />
     <httpPassword>Encrypted </httpPassword>
     <proxyHost />
@@ -596,8 +621,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>496</xloc>
-      <yloc>464</yloc>
+      <xloc>976</xloc>
+      <yloc>528</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -626,7 +651,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>992</xloc>
+      <xloc>976</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
@@ -661,7 +686,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>496</xloc>
+      <xloc>432</xloc>
       <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1364,14 +1389,14 @@
       <method>none</method>
       <schema_name />
     </partitioning>
-    <applicationType>TEXT PLAIN</applicationType>
+    <applicationType>JSON</applicationType>
     <method>POST</method>
-    <url>http://state-spring:3060/v1/state</url>
+    <url>http://state-spring:3060/v1/state/host/localhost</url>
     <urlInField>N</urlInField>
     <dynamicMethod>N</dynamicMethod>
     <methodFieldName />
     <urlField />
-    <bodyField />
+    <bodyField>requestBody</bodyField>
     <httpLogin />
     <httpPassword>Encrypted </httpPassword>
     <proxyHost />
@@ -1400,8 +1425,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>240</xloc>
-      <yloc>464</yloc>
+      <xloc>816</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1491,44 +1516,6 @@
     </GUI>
   </step>
   <step>
-    <name>Switch / case</name>
-    <type>SwitchCase</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <fieldname>result</fieldname>
-    <use_contains>N</use_contains>
-    <case_value_type>None</case_value_type>
-    <case_value_format />
-    <case_value_decimal />
-    <case_value_group />
-    <default_target_step>SUCCESS</default_target_step>
-    <cases>
-      <case>
-        <value>N</value>
-        <target_step>Blocking step</target_step>
-      </case>
-    </cases>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>368</xloc>
-      <yloc>416</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>select full path</name>
     <type>SelectValues</type>
     <description />
@@ -1554,65 +1541,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>896</xloc>
+      <xloc>880</xloc>
       <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Text file output</name>
-    <type>TextFileOutput</type>
-    <description />
-    <distribute>Y</distribute>
-    <custom_distribution />
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name />
-    </partitioning>
-    <separator>;</separator>
-    <enclosure>"</enclosure>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>Y</header>
-    <footer>N</footer>
-    <format>DOS</format>
-    <compression>None</compression>
-    <encoding />
-    <endedLine />
-    <fileNameInField>N</fileNameInField>
-    <fileNameField />
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name>file</name>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>txt</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format />
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery />
-    </file>
-    <fields>
-    </fields>
-    <attributes />
-    <cluster_schema />
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>992</xloc>
-      <yloc>400</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1635,7 +1565,7 @@
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>trans_Status = CONTINUE_TRANSFORMATION
 
-if (all_files.equals(""))
+if (all_files === null)
 {
 	trans_Status = SKIP_TRANSFORMATION
 }
@@ -1653,8 +1583,258 @@ if (all_files.equals(""))
       </output>
     </remotesteps>
     <GUI>
-      <xloc>528</xloc>
+      <xloc>544</xloc>
       <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Remove blanks 2</name>
+    <type>ScriptValueMod</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>trans_Status = CONTINUE_TRANSFORMATION
+
+if (all_files === null)
+{
+	trans_Status = SKIP_TRANSFORMATION
+}
+
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>64</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Filter rows</name>
+    <type>FilterRows</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <send_true_to>Success Path</send_true_to>
+    <send_false_to>Failure Path</send_false_to>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>result</leftvalue>
+        <function>=</function>
+        <rightvalue />
+        <value>
+          <name>constant</name>
+          <type>Boolean</type>
+          <text>Y</text>
+          <length>-1</length>
+          <precision>-1</precision>
+          <isnull>N</isnull>
+          <mask />
+        </value>
+      </condition>
+    </compare>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>976</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Success Path</name>
+    <type>BlockingStep</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <pass_all_rows>N</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Failure Path</name>
+    <type>BlockingStep</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <pass_all_rows>N</pass_all_rows>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>block</prefix>
+    <cache_size>5000</cache_size>
+    <compress>Y</compress>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>976</xloc>
+      <yloc>320</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Failure Message</name>
+    <type>ScriptValueMod</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>//Script here
+var pathParts = full_path.split("package_");
+var packagePortion = pathParts[1].split("/");
+var packageId = packagePortion[0];
+var requestBody = '{ "packageId":' + packageId + ', "state": "VALIDATION_FAILED",' + 
+	'"largeUploadChecked": "false", "codicil": "Metadata file specifies files that are missing" }';
+
+ 
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>requestBody</name>
+        <rename>requestBody</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>976</xloc>
+      <yloc>416</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Success message</name>
+    <type>ScriptValueMod</type>
+    <description />
+    <distribute>Y</distribute>
+    <custom_distribution />
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name />
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>//Script here
+var pathParts = full_path.split("package_");
+var packagePortion = pathParts[1].split("/");
+var packageId = packagePortion[0];
+var requestBody = '{ "packageId":' + packageId + ', "state": "VALIDATION_SUCCEEDED",' + 
+	'"largeUploadChecked": "false", "codicil": "" }';
+
+ 
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>requestBody</name>
+        <rename>requestBody</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <attributes />
+    <cluster_schema />
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>816</xloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
