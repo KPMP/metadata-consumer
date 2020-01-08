@@ -762,18 +762,6 @@
         <precision>-1</precision>
         <trim_type>none</trim_type>
       </field>
-      <field>
-        <name>packageId</name>
-        <variable>${packageId}</variable>
-        <type>String</type>
-        <format />
-        <currency />
-        <decimal />
-        <group />
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
     </fields>
     <attributes />
     <cluster_schema />
@@ -1490,12 +1478,6 @@
       <field>
         <field_name>packageDirectory</field_name>
         <variable_name>${packageDirectory}</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value />
-      </field>
-      <field>
-        <field_name>packageId</field_name>
-        <variable_name>${packageId}</variable_name>
         <variable_type>JVM</variable_type>
         <default_value />
       </field>
