@@ -448,16 +448,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Set variables</from>
-      <to>Read Metadata 2</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>Set variables</from>
-      <to>Read Metadata 3</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
       <from>Sort rows</from>
       <to>Merge join</to>
       <enabled>Y</enabled>
@@ -473,27 +463,22 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>BAM Tab</from>
+      <to>Sort rows 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>Merge join 2</from>
       <to>Modified JavaScript value</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Read Metadata 2</from>
-      <to>Sort rows 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Read Metadata 3</from>
+      <from>Expression Matrix Tab</from>
       <to>Sort rows 3</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Set variables</from>
-      <to>Microsoft Excel input</to>
-      <enabled>N</enabled>
-    </hop>
-    <hop>
-      <from>Microsoft Excel input</from>
+      <from>FASTQ Tab</from>
       <to>Sort rows</to>
       <enabled>Y</enabled>
     </hop>
@@ -507,222 +492,24 @@
       <to>Merge join 2</to>
       <enabled>Y</enabled>
     </hop>
+    <hop>
+      <from>Set variables</from>
+      <to>FASTQ Tab</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Set variables</from>
+      <to>BAM Tab</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Set variables</from>
+      <to>Expression Matrix Tab</to>
+      <enabled>Y</enabled>
+    </hop>
   </order>
   <step>
-    <name>Get variables</name>
-    <type>GetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>baseDirectory</name>
-        <variable>${baseDirectory}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>packageDirectory</name>
-        <variable>${packageDirectory}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>64</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Merge join</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>INNER</join_type>
-    <step1>Sort rows</step1>
-    <step2>Sort rows 2</step2>
-    <keys_1>
-      <key>SampleID</key>
-    </keys_1>
-    <keys_2>
-      <key>SampleID</key>
-    </keys_2>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>624</xloc>
-      <yloc>176</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Merge join 2</name>
-    <type>MergeJoin</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <join_type>INNER</join_type>
-    <step1>Sort rows 4</step1>
-    <step2>Sort rows 3</step2>
-    <keys_1>
-      <key>SampleID</key>
-    </keys_1>
-    <keys_2>
-      <key>SampleID</key>
-    </keys_2>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>704</xloc>
-      <yloc>320</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Modified JavaScript value</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var sampleObj = {
-sampleId:SampleID,
-fastQFilename:FastQFilename,
-fastQFilenamePairedEnd:FastQFilenamePairedEnd,
-cryosectioningDate:CryosectioningDate,
-tissueSegmentionDissociationDate:TissueSegmentionDissociationDate,
-areaDissectedProcessed:AreaDissectedProcessed,
-calculatedVolumeDissectedProcessed:CalculatedVolumeDissectedProcessed,
-numberofCellsNucleiLoaded:NumberofCellsNucleiLoaded,
-tissueProcessingComments:TissueProcessingComments,
-singleCellNucleusProcessingInstrument:SingleCellNucleusProcessingInstrument,
-rnaAmplificationChemistryKit:RNAAmplificationChemistryKit,
-libraryPreparationDate:LibraryPreparationDate,
-libraryStartingConcentration:LibraryStartingConcentration,
-libraryStartingConcentrationUnit:LibraryStartingConcentrationUnit,
-libraryPrepChemistryKit:LibraryPrepChemistryKit,
-libraryFragmentationMethod:LibraryFragmentationMethod,
-numberofPCRCyclescDNA:NumberofPCRCyclescDNA,
-cdnaLibraryYield:cDNALibraryYield,
-rNAProcessingComments:RNAProcessingComments,
-sequencingCenter:SequencingCenter,
-sequencingPlatform:SequencingPlatform,
-sequencerModel:SequencerModel,
-sequencerSoftwareVersion:SequencerSoftwareVersion,
-sequencingDate:SequencingDate,
-cdnaQuantityLoaded:cDNAQuantityLoaded,
-singlePairedEnd:SinglePairedEnd,
-strand1ReadLength:Strand1ReadLength,
-strand2ReadLength:Strand2ReadLength,
-sequencingNumberofCycles:SequencingNumberofCycles,
-sequencingOperator:SequencingOperator,
-totalRawReads:TotalRawReads,
-q30Score:Q30Score,
-sequencingComments:SequencingComments,
-bamFilename:BAMFilename,
-rnaAlignmentPlatform:RNAAlignmentPlatform,
-rnaAlignmentPlatformVersion:RNAAlignmentPlatformVersion,
-referenceGenome:ReferenceGenome,
-unassignedReads:UnassignedReads,
-uniquelyMappedReads:UniquelyMappedReads,
-uniquelyMappedRawReads:UniquelyMappedRawReads,
-expressionMatrixFilename:ExpressionMatrixFilename,
-rnaDownstreamAnalysisPlatform:RNADownstreamAnalysisPlatform,
-rnaDownstreamAnalysisPlatformVersion:RNADownstreamAnalysisPlatformVersion,
-numberofCellsSequencedPostQC:NumberofCellsSequencedPostQC,
-genesDetected:GenesDetected,
-meanGenesDetected:MeanGenesDetected,
-meanUMIDetected:MeanUMIDetected,
-rnaProcessingAnalysisComments:RNAProcessingAnalysisComments
-}
-var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>sampleJson</name>
-        <rename>sampleJson</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>832</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Read Metadata 2</name>
+    <name>BAM Tab</name>
     <type>ExcelInput</type>
     <description/>
     <distribute>N</distribute>
@@ -748,8 +535,8 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
     <accept_field/>
     <accept_stepname/>
     <file>
-      <name>C:\Users\zachw\Desktop\KPMPTranscriptomicsMetadata.xlsx</name>
-      <filemask/>
+      <name>${baseDirectory}/${packageDirectory}</name>
+      <filemask>METADATA_.*.xlsx</filemask>
       <exclude_filemask/>
       <file_required>N</file_required>
       <include_subfolders>N</include_subfolders>
@@ -887,13 +674,13 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>288</xloc>
-      <yloc>144</yloc>
+      <xloc>464</xloc>
+      <yloc>272</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Read Metadata 3</name>
+    <name>Expression Matrix Tab</name>
     <type>ExcelInput</type>
     <description/>
     <distribute>N</distribute>
@@ -919,8 +706,8 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
     <accept_field/>
     <accept_stepname/>
     <file>
-      <name>C:\Users\zachw\Desktop\KPMPTranscriptomicsMetadata.xlsx</name>
-      <filemask/>
+      <name>${baseDirectory}/${packageDirectory}</name>
+      <filemask>METADATA_.*.xlsx</filemask>
       <exclude_filemask/>
       <file_required>N</file_required>
       <include_subfolders>N</include_subfolders>
@@ -939,7 +726,31 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
         <group/>
       </field>
       <field>
-        <name>ExpressionMatrixFilename</name>
+        <name>BarcodesFileName</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>ExpressionMatrixFileName</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>GenesFeaturesFileName</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -963,6 +774,18 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
         <group/>
       </field>
       <field>
+        <name>RNADownstreamAnalysisPlatformOtherSpecify</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
         <name>RNADownstreamAnalysisPlatformVersion</name>
         <type>String</type>
         <length>-1</length>
@@ -975,8 +798,32 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
         <group/>
       </field>
       <field>
-        <name>NumberofCellsSequencedPostQC</name>
+        <name>SequencingSaturation</name>
         <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>MedianNumberofRawSequencingReads</name>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>NumberofCellsSequencedPostQC</name>
+        <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -999,7 +846,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
         <group/>
       </field>
       <field>
-        <name>MeanGenesDetected</name>
+        <name>MedianGenesDetected</name>
         <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1011,7 +858,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
         <group/>
       </field>
       <field>
-        <name>MeanUMIDetected</name>
+        <name>MedianUMIDetected</name>
         <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1070,251 +917,16 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>240</yloc>
+      <xloc>464</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Set variables</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>baseDirectory</field_name>
-        <variable_name>${baseDirectory}</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-      </field>
-      <field>
-        <field_name>packageDirectory</field_name>
-        <variable_name>${packageDirectory}</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>160</xloc>
-      <yloc>64</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort rows</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>SampleID</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>528</xloc>
-      <yloc>128</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort rows 2</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>SampleID</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>496</xloc>
-      <yloc>240</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Sort rows 3</name>
-    <type>SortRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <directory>%%java.io.tmpdir%%</directory>
-    <prefix>out</prefix>
-    <sort_size>1000000</sort_size>
-    <free_memory/>
-    <compress>N</compress>
-    <compress_variable/>
-    <unique_rows>N</unique_rows>
-    <fields>
-      <field>
-        <name>SampleID</name>
-        <ascending>Y</ascending>
-        <case_sensitive>N</case_sensitive>
-        <collator_enabled>N</collator_enabled>
-        <collator_strength>0</collator_strength>
-        <presorted>N</presorted>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>544</xloc>
-      <yloc>336</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Text file output</name>
-    <type>TextFileOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <separator/>
-    <enclosure/>
-    <enclosure_forced>Y</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>N</header>
-    <footer>N</footer>
-    <format>UNIX</format>
-    <compression>None</compression>
-    <encoding>windows-1252</encoding>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>N</create_parent_folder>
-    <file>
-      <name>C:/Users/zachw/Desktop/metadataIngestOutput</name>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
-      <extention>json</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery/>
-    </file>
-    <fields>
-      <field>
-        <name>sampleJson</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>960</xloc>
-      <yloc>144</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Microsoft Excel input</name>
+    <name>FASTQ Tab</name>
     <type>ExcelInput</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -1337,8 +949,8 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
     <accept_field/>
     <accept_stepname/>
     <file>
-      <name>C:\Users\zachw\Desktop\KPMPTranscriptomicsMetadata.xlsx</name>
-      <filemask/>
+      <name>${baseDirectory}/${packageDirectory}</name>
+      <filemask>METADATA_.*.xlsx</filemask>
       <exclude_filemask/>
       <file_required>N</file_required>
       <include_subfolders>N</include_subfolders>
@@ -1776,8 +1388,359 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>352</xloc>
-      <yloc>64</yloc>
+      <xloc>464</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Get variables</name>
+    <type>GetVariable</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <name>baseDirectory</name>
+        <variable>${baseDirectory}</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+      <field>
+        <name>packageDirectory</name>
+        <variable>${packageDirectory}</variable>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>96</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Merge join</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <join_type>INNER</join_type>
+    <step1>Sort rows</step1>
+    <step2>Sort rows 2</step2>
+    <keys_1>
+      <key>SampleID</key>
+    </keys_1>
+    <keys_2>
+      <key>SampleID</key>
+    </keys_2>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>736</xloc>
+      <yloc>240</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Merge join 2</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <join_type>INNER</join_type>
+    <step1>Sort rows 4</step1>
+    <step2>Sort rows 3</step2>
+    <keys_1>
+      <key>SampleID</key>
+    </keys_1>
+    <keys_2>
+      <key>SampleID</key>
+    </keys_2>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>832</xloc>
+      <yloc>400</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Modified JavaScript value</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var sampleObj = {};
+var fieldMapString = getVariable("fieldMap", "");
+var fieldMap = fieldMapString.split("|");
+
+for(var i = 0; i &lt; fieldMap.length; i++) {
+	var fieldPair = fieldMap[i];
+	var dataType = 'String';
+	var fieldArr = fieldPair.split(",");
+	var fieldIndex = getInputRowMeta().indexOfValue(fieldArr[0]);
+    var metadata = getInputRowMeta().getValueMeta(fieldIndex);
+	if (metadata != null) {
+		dataType = metadata.getTypeDesc();
+	}
+	var fieldVal = row[getInputRowMeta().indexOfValue(fieldArr[0])];
+    if (dataType == 'Number' || dataType == 'Integer') {
+		fieldVal = Number(fieldVal);
+    } else {
+		fieldVal = String(fieldVal);
+	}
+	sampleObj[fieldArr[1]] = fieldVal;
+};
+
+var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>sampleJson</name>
+        <rename>sampleJson</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>944</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Set variables</name>
+    <type>SetVariable</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>
+      <field>
+        <field_name>baseDirectory</field_name>
+        <variable_name>${baseDirectory}</variable_name>
+        <variable_type>JVM</variable_type>
+        <default_value/>
+      </field>
+      <field>
+        <field_name>packageDirectory</field_name>
+        <variable_name>${packageDirectory}</variable_name>
+        <variable_type>JVM</variable_type>
+        <default_value/>
+      </field>
+    </fields>
+    <use_formatting>Y</use_formatting>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>224</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>SampleID</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>640</xloc>
+      <yloc>192</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows 2</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>SampleID</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>640</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Sort rows 3</name>
+    <type>SortRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <directory>%%java.io.tmpdir%%</directory>
+    <prefix>out</prefix>
+    <sort_size>1000000</sort_size>
+    <free_memory/>
+    <compress>N</compress>
+    <compress_variable/>
+    <unique_rows>N</unique_rows>
+    <fields>
+      <field>
+        <name>SampleID</name>
+        <ascending>Y</ascending>
+        <case_sensitive>N</case_sensitive>
+        <collator_enabled>N</collator_enabled>
+        <collator_strength>0</collator_strength>
+        <presorted>N</presorted>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>640</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1818,7 +1781,76 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>656</xloc>
+      <xloc>784</xloc>
+      <yloc>304</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Text file output</name>
+    <type>TextFileOutput</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <separator/>
+    <enclosure/>
+    <enclosure_forced>Y</enclosure_forced>
+    <enclosure_fix_disabled>N</enclosure_fix_disabled>
+    <header>N</header>
+    <footer>N</footer>
+    <format>UNIX</format>
+    <compression>None</compression>
+    <encoding>windows-1252</encoding>
+    <endedLine/>
+    <fileNameInField>N</fileNameInField>
+    <fileNameField/>
+    <create_parent_folder>N</create_parent_folder>
+    <file>
+      <name>C:/Users/zachw/Desktop/ingestOutput</name>
+      <servlet_output>N</servlet_output>
+      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <extention>json</extention>
+      <append>N</append>
+      <split>N</split>
+      <haspartno>N</haspartno>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <SpecifyFormat>N</SpecifyFormat>
+      <date_time_format/>
+      <add_to_result_filenames>Y</add_to_result_filenames>
+      <pad>N</pad>
+      <fast_dump>N</fast_dump>
+      <splitevery/>
+    </file>
+    <fields>
+      <field>
+        <name>sampleJson</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1136</xloc>
       <yloc>240</yloc>
       <draw>Y</draw>
     </GUI>
