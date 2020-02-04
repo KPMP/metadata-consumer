@@ -78,7 +78,7 @@ async function getFlattenedPackageFiles(package, db) {
         delete doc.submitter;
 
         output.push({
-          index: { _index: ES_INDEX, _type: 'package-metadata', _id: doc.fileId }
+          index: { _index: ES_INDEX, _type: 'package-metadata', _id: fileCt > 0 ? doc.fileId : doc.packageId }
         });
 
         output.push(doc);
@@ -100,8 +100,9 @@ async function insertPackages(body) {
       }
 
       else {
-        esClient.bulk({ body: body }, function (err, res) {});
-        res();
+        esClient.bulk({ body: body }, function (err, result) {
+          res();
+        });
       }
     });
   });
