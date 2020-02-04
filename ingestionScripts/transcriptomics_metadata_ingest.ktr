@@ -675,7 +675,7 @@
     </remotesteps>
     <GUI>
       <xloc>464</xloc>
-      <yloc>272</yloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1473,8 +1473,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>736</xloc>
-      <yloc>240</yloc>
+      <xloc>784</xloc>
+      <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1507,8 +1507,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>832</xloc>
-      <yloc>400</yloc>
+      <xloc>784</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1574,7 +1574,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
     </remotesteps>
     <GUI>
       <xloc>944</xloc>
-      <yloc>288</yloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1656,7 +1656,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
     </remotesteps>
     <GUI>
       <xloc>640</xloc>
-      <yloc>192</yloc>
+      <yloc>128</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1698,7 +1698,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
     </remotesteps>
     <GUI>
       <xloc>640</xloc>
-      <yloc>288</yloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1782,7 +1782,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
     </remotesteps>
     <GUI>
       <xloc>784</xloc>
-      <yloc>304</yloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1850,8 +1850,8 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1136</xloc>
-      <yloc>240</yloc>
+      <xloc>1104</xloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
