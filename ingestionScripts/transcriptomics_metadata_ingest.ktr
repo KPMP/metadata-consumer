@@ -1604,7 +1604,10 @@
       <jsScript>
         <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var sampleObj = {};
+        <jsScript_script>var sampleObj = {
+	packageID: getVariable("packageID", ""),
+	replicateID:String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
+};
 var fieldMapString = getVariable("fieldMap", "");
 var fieldMap = fieldMapString.split("|");
 
@@ -2011,6 +2014,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
         <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>var sampleObj = {
+	packageID: getVariable("packageID", ""),
 	replicateID:String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
 };
 var fastQFiles = {};
@@ -2038,12 +2042,18 @@ for(var i = 0; i &lt; fieldMap.length; i++) {
 		fieldVal = String(fieldVal);
 	}
 	if (fileType == 'FASTQ') {
+		fastQFiles['fastQFileName'] = String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name:")]);
+		fastQFiles['fastQFileNamePairedEnd'] = String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name (Paired End):")]);
     	fastQFiles[fieldJsonProperty] = fieldVal;
 	}
 	else if (fileType == 'BAM') {
+		bamFiles['bamFileName'] = String(row[getInputRowMeta().indexOfValue("Associated BAM File Name:")]);
     	bamFiles[fieldJsonProperty] = fieldVal;
 	}
 	else if (fileType == 'Expression Matrix') {
+		expressionMatrixFiles['barcodesFileName'] = String(row[getInputRowMeta().indexOfValue("Barcodes File Name:")])
+		expressionMatrixFiles['matrixFileName'] = String(row[getInputRowMeta().indexOfValue("Matrix File Name:")])
+		expressionMatrixFiles['genesFileName'] = String(row[getInputRowMeta().indexOfValue("Genes/Features File Name:")])
     	expressionMatrixFiles[fieldJsonProperty] = fieldVal;
 	}
 	else {
@@ -2511,6 +2521,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
         <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>var sampleObj = {
+	packageID: getVariable("packageID", ""),
 	replicateID:String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
 	fileType:"FASTQ"
 };
@@ -2591,6 +2602,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
         <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>var sampleObj = {
+	packageID: getVariable("packageID", ""),
 	replicateID:String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
 	fileType:"BAM"
 };
@@ -2699,6 +2711,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
         <jsScript_type>0</jsScript_type>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>var sampleObj = {
+	packageID: getVariable("packageID", ""),
 	replicateID:String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
 	fileType:"Expression Matrix"
 };

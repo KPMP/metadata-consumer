@@ -367,7 +367,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>224</xloc>
-      <yloc>272</yloc>
+      <yloc>224</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -414,8 +414,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>432</xloc>
-      <yloc>272</yloc>
+      <xloc>384</xloc>
+      <yloc>224</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -437,7 +437,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>224</xloc>
-      <yloc>416</yloc>
+      <yloc>464</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -457,6 +457,11 @@
         <field>
           <variable_name>packageDirectory</variable_name>
           <variable_value>Desktop</variable_value>
+          <variable_type>JVM</variable_type>
+        </field>
+        <field>
+          <variable_name>packageID</variable_name>
+          <variable_value>1234567890</variable_value>
           <variable_type>JVM</variable_type>
         </field>
       </fields>
@@ -502,7 +507,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>224</xloc>
-      <yloc>144</yloc>
+      <yloc>128</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
