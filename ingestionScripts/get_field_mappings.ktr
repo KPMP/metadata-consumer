@@ -822,6 +822,18 @@
     </file>
     <fields>
       <field>
+        <name>Associated File Type</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
         <name>Property</name>
         <type>None</type>
         <format/>
@@ -1112,7 +1124,7 @@
     </remotesteps>
     <GUI>
       <xloc>528</xloc>
-      <yloc>288</yloc>
+      <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1156,7 +1168,7 @@
     </remotesteps>
     <GUI>
       <xloc>528</xloc>
-      <yloc>384</yloc>
+      <yloc>368</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
