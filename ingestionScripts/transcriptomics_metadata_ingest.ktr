@@ -468,11 +468,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Merge join 2</from>
-      <to>Modified JavaScript value</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Expression Matrix Tab</from>
       <to>Sort rows 3</to>
       <enabled>Y</enabled>
@@ -505,6 +500,16 @@
     <hop>
       <from>Set variables</from>
       <to>Expression Matrix Tab</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Merge join 2</from>
+      <to>Remove Nulls</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Remove Nulls</from>
+      <to>Modified JavaScript value</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -543,7 +548,7 @@
     </file>
     <fields>
       <field>
-        <name>SampleID</name>
+        <name>Replicate ID</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -555,7 +560,7 @@
         <group/>
       </field>
       <field>
-        <name>BAMFilename</name>
+        <name>Associated File Name:</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -567,7 +572,7 @@
         <group/>
       </field>
       <field>
-        <name>RNAAlignmentPlatform</name>
+        <name>RNA Alignment Platform</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -579,7 +584,7 @@
         <group/>
       </field>
       <field>
-        <name>RNAAlignmentPlatformVersion</name>
+        <name>RNA Alignment Platform Version</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -591,7 +596,7 @@
         <group/>
       </field>
       <field>
-        <name>ReferenceGenome</name>
+        <name>Reference Genome</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -603,8 +608,8 @@
         <group/>
       </field>
       <field>
-        <name>UnassignedReads</name>
-        <type>Number</type>
+        <name>Unassigned Reads</name>
+        <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -615,8 +620,8 @@
         <group/>
       </field>
       <field>
-        <name>UniquelyMappedReads</name>
-        <type>Number</type>
+        <name>Uniquely Mapped Reads</name>
+        <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -627,8 +632,8 @@
         <group/>
       </field>
       <field>
-        <name>UniquelyMappedRawReads</name>
-        <type>Number</type>
+        <name>Uniquely Mapped / Raw Reads (Mapping Rate)</name>
+        <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -642,7 +647,7 @@
     <sheets>
       <sheet>
         <name>BAM</name>
-        <startrow>3</startrow>
+        <startrow>1</startrow>
         <startcol>0</startcol>
       </sheet>
     </sheets>
@@ -714,7 +719,7 @@
     </file>
     <fields>
       <field>
-        <name>SampleID</name>
+        <name>Replicate ID</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -726,7 +731,7 @@
         <group/>
       </field>
       <field>
-        <name>BarcodesFileName</name>
+        <name>Barcodes File Name:</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -738,7 +743,7 @@
         <group/>
       </field>
       <field>
-        <name>ExpressionMatrixFileName</name>
+        <name>Matrix File Name:</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -750,7 +755,7 @@
         <group/>
       </field>
       <field>
-        <name>GenesFeaturesFileName</name>
+        <name>Genes/Features File Name:</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -762,7 +767,7 @@
         <group/>
       </field>
       <field>
-        <name>RNADownstreamAnalysisPlatform</name>
+        <name>RNA Downstream Analysis Platform</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -774,7 +779,7 @@
         <group/>
       </field>
       <field>
-        <name>RNADownstreamAnalysisPlatformOtherSpecify</name>
+        <name>RNA Downstream Analysis Platform Other Specify</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -786,7 +791,7 @@
         <group/>
       </field>
       <field>
-        <name>RNADownstreamAnalysisPlatformVersion</name>
+        <name>RNA Downstream Analysis Platform Version</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -798,31 +803,7 @@
         <group/>
       </field>
       <field>
-        <name>SequencingSaturation</name>
-        <type>Number</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-      <field>
-        <name>MedianNumberofRawSequencingReads</name>
-        <type>Number</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-      <field>
-        <name>NumberofCellsSequencedPostQC</name>
+        <name>Sequencing Saturation</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -834,8 +815,8 @@
         <group/>
       </field>
       <field>
-        <name>GenesDetected</name>
-        <type>Number</type>
+        <name>Median Number of Raw Sequencing Reads (per cell/nucleus)</name>
+        <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -846,8 +827,8 @@
         <group/>
       </field>
       <field>
-        <name>MedianGenesDetected</name>
-        <type>Number</type>
+        <name>Number of Cells Sequenced Post-QC</name>
+        <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -858,8 +839,8 @@
         <group/>
       </field>
       <field>
-        <name>MedianUMIDetected</name>
-        <type>Number</type>
+        <name>Genes Detected</name>
+        <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -870,7 +851,31 @@
         <group/>
       </field>
       <field>
-        <name>RNAProcessingAnalysisComments</name>
+        <name>Median Genes Detected (per cell/nucleus)</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Median UMI Detected (per cell/nucleus)</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>RNA Processing/Analysis Comments</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -885,7 +890,7 @@
     <sheets>
       <sheet>
         <name>Expression Matrix</name>
-        <startrow>3</startrow>
+        <startrow>1</startrow>
         <startcol>0</startcol>
       </sheet>
     </sheets>
@@ -957,7 +962,7 @@
     </file>
     <fields>
       <field>
-        <name>SampleID</name>
+        <name>Replicate ID</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -969,7 +974,7 @@
         <group/>
       </field>
       <field>
-        <name>FastQFilename</name>
+        <name>Associated File Name:</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -981,7 +986,7 @@
         <group/>
       </field>
       <field>
-        <name>FastQFilenamePairedEnd</name>
+        <name>Associated File Name (Paired End):</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -993,7 +998,7 @@
         <group/>
       </field>
       <field>
-        <name>CryosectioningDate</name>
+        <name>Cryosectioning Date</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1005,7 +1010,7 @@
         <group/>
       </field>
       <field>
-        <name>TissueSegmentionDissociationDate</name>
+        <name>Tissue Segmention / Dissociation Date</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1017,43 +1022,7 @@
         <group/>
       </field>
       <field>
-        <name>AreaDissectedProcessed</name>
-        <type>Number</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-      <field>
-        <name>CalculatedVolumeDissectedProcessed</name>
-        <type>Number</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-      <field>
-        <name>NumberofCellsNucleiLoaded</name>
-        <type>Number</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-      <field>
-        <name>TissueProcessingComments</name>
+        <name>Area Dissected / Processed (Square Microns)</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1065,7 +1034,7 @@
         <group/>
       </field>
       <field>
-        <name>SingleCellNucleusProcessingInstrument</name>
+        <name>Calculated Volume Dissected / Processed</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1077,7 +1046,7 @@
         <group/>
       </field>
       <field>
-        <name>RNAAmplificationChemistryKit</name>
+        <name>Number of Cells / Nuclei Loaded</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1089,7 +1058,7 @@
         <group/>
       </field>
       <field>
-        <name>LibraryPreparationDate</name>
+        <name>Tissue Processing Comments</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1101,7 +1070,7 @@
         <group/>
       </field>
       <field>
-        <name>LibraryStartingConcentration</name>
+        <name>Single Cell / Nucleus Processing Instrument</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1113,7 +1082,7 @@
         <group/>
       </field>
       <field>
-        <name>LibraryStartingConcentrationUnit</name>
+        <name>RNA Amplification Chemistry / Kit</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1125,7 +1094,7 @@
         <group/>
       </field>
       <field>
-        <name>LibraryPrepChemistryKit</name>
+        <name>Library Preparation Date</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1137,7 +1106,7 @@
         <group/>
       </field>
       <field>
-        <name>LibraryFragmentationMethod</name>
+        <name>Library Starting Concentration</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1149,19 +1118,7 @@
         <group/>
       </field>
       <field>
-        <name>NumberofPCRCyclescDNA</name>
-        <type>Number</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-      <field>
-        <name>cDNALibraryYield</name>
+        <name>Library Starting Concentration Unit</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1173,7 +1130,7 @@
         <group/>
       </field>
       <field>
-        <name>RNAProcessingComments</name>
+        <name>Library Prep Chemistry / Kit</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1185,7 +1142,7 @@
         <group/>
       </field>
       <field>
-        <name>SequencingCenter</name>
+        <name>Library Fragmentation Method</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1197,7 +1154,7 @@
         <group/>
       </field>
       <field>
-        <name>SequencingPlatform</name>
+        <name>Number of PCR Cycles cDNA</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1209,7 +1166,7 @@
         <group/>
       </field>
       <field>
-        <name>SequencerModel</name>
+        <name>cDNA Library Yield</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1221,7 +1178,7 @@
         <group/>
       </field>
       <field>
-        <name>SequencerSoftwareVersion</name>
+        <name>RNA Processing Comments</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1233,7 +1190,7 @@
         <group/>
       </field>
       <field>
-        <name>SequencingDate</name>
+        <name>Sequencing Center</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1245,19 +1202,7 @@
         <group/>
       </field>
       <field>
-        <name>cDNAQuantityLoaded</name>
-        <type>Number</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-      <field>
-        <name>SinglePairedEnd</name>
+        <name>Sequencing Platform</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1269,43 +1214,7 @@
         <group/>
       </field>
       <field>
-        <name>Strand1ReadLength</name>
-        <type>Number</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-      <field>
-        <name>Strand2ReadLength</name>
-        <type>Number</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-      <field>
-        <name>SequencingNumberofCycles</name>
-        <type>Number</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-      <field>
-        <name>SequencingOperator</name>
+        <name>Sequencer Model</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1317,19 +1226,7 @@
         <group/>
       </field>
       <field>
-        <name>TotalRawReads</name>
-        <type>Number</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-      <field>
-        <name>Q30Score</name>
+        <name>Sequencer Software / Version</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1341,7 +1238,115 @@
         <group/>
       </field>
       <field>
-        <name>SequencingComments</name>
+        <name>Sequencing Date</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>cDNA Quantity Loaded</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Single / Paired End</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Strand 1 Read Length (bp)</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Strand 2 Read Length (bp)</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Sequencing Number of Cycles</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Sequencing Operator</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Total Raw Reads</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Q30 Score (Percentage)</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Sequencing Comments</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1356,7 +1361,7 @@
     <sheets>
       <sheet>
         <name>FASTQ</name>
-        <startrow>3</startrow>
+        <startrow>1</startrow>
         <startcol>0</startcol>
       </sheet>
     </sheets>
@@ -1459,10 +1464,10 @@
     <step1>Sort rows</step1>
     <step2>Sort rows 2</step2>
     <keys_1>
-      <key>SampleID</key>
+      <key>Replicate ID</key>
     </keys_1>
     <keys_2>
-      <key>SampleID</key>
+      <key>Replicate ID</key>
     </keys_2>
     <attributes/>
     <cluster_schema/>
@@ -1493,10 +1498,10 @@
     <step1>Sort rows 4</step1>
     <step2>Sort rows 3</step2>
     <keys_1>
-      <key>SampleID</key>
+      <key>Replicate ID</key>
     </keys_1>
     <keys_2>
-      <key>SampleID</key>
+      <key>Replicate ID</key>
     </keys_2>
     <attributes/>
     <cluster_schema/>
@@ -1573,7 +1578,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>944</xloc>
+      <xloc>1024</xloc>
       <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1613,7 +1618,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>224</xloc>
+      <xloc>272</xloc>
       <yloc>256</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1638,7 +1643,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>SampleID</name>
+        <name>Replicate ID</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1680,7 +1685,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>SampleID</name>
+        <name>Replicate ID</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1722,7 +1727,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>SampleID</name>
+        <name>Replicate ID</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1764,7 +1769,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
     <unique_rows>N</unique_rows>
     <fields>
       <field>
-        <name>SampleID</name>
+        <name>Replicate ID</name>
         <ascending>Y</ascending>
         <case_sensitive>N</case_sensitive>
         <collator_enabled>N</collator_enabled>
@@ -1850,7 +1855,42 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1104</xloc>
+      <xloc>1152</xloc>
+      <yloc>384</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Remove Nulls</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to/>
+    <send_false_to/>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>Replicate ID</leftvalue>
+        <function>IS NOT NULL</function>
+        <rightvalue/>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>880</xloc>
       <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>

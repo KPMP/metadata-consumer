@@ -443,22 +443,12 @@
     </hop>
     <hop>
       <from>Memory group by</from>
-      <to>Set variables 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Filter rows Single-nucleus RNA-Seq</from>
-      <to>Concat fields</to>
+      <to>Set fieldMap variable</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Microsoft Excel input</from>
       <to>Get variables</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Get variables</from>
-      <to>Switch / case</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -504,6 +494,21 @@
     <hop>
       <from>Single-cell RNA-Seq</from>
       <to>Concat fields</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Filter rows Single-nucleus RNA-Seq</from>
+      <to>Concat fields</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Get variables</from>
+      <to>Remove Nulls</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Remove Nulls</from>
+      <to>Switch / case</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -769,7 +774,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>128</xloc>
+      <xloc>64</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
@@ -817,7 +822,7 @@
     </file>
     <fields>
       <field>
-        <name>json Property Name</name>
+        <name>Property</name>
         <type>None</type>
         <format/>
         <currency/>
@@ -891,13 +896,13 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>944</xloc>
+      <xloc>880</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Set variables 2</name>
+    <name>Set fieldMap variable</name>
     <type>SetVariable</type>
     <description/>
     <distribute>Y</distribute>
@@ -925,7 +930,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1104</xloc>
+      <xloc>1024</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1062,7 +1067,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>240</xloc>
+      <xloc>160</xloc>
       <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1107,7 +1112,7 @@
     </remotesteps>
     <GUI>
       <xloc>528</xloc>
-      <yloc>240</yloc>
+      <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1151,7 +1156,7 @@
     </remotesteps>
     <GUI>
       <xloc>528</xloc>
-      <yloc>336</yloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1195,7 +1200,7 @@
     </remotesteps>
     <GUI>
       <xloc>528</xloc>
-      <yloc>432</yloc>
+      <yloc>480</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1239,7 +1244,42 @@
     </remotesteps>
     <GUI>
       <xloc>528</xloc>
-      <yloc>528</yloc>
+      <yloc>592</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Remove Nulls</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>Switch / case</send_true_to>
+    <send_false_to/>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>json Property Name</leftvalue>
+        <function>IS NOT NULL</function>
+        <rightvalue/>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>256</xloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
