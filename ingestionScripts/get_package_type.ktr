@@ -443,11 +443,6 @@
     </hop>
     <hop>
       <from>Get variables</from>
-      <to>Set variables 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Set variables 2</from>
       <to>Microsoft Excel input</to>
       <enabled>Y</enabled>
     </hop>
@@ -546,7 +541,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>432</xloc>
+      <xloc>368</xloc>
       <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
@@ -638,46 +633,6 @@
     </remotesteps>
     <GUI>
       <xloc>160</xloc>
-      <yloc>304</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Set variables 2</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>baseDirectory</field_name>
-        <variable_name>${baseDirectory}</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-      </field>
-      <field>
-        <field_name>packageDirectory</field_name>
-        <variable_name>${packageDirectory}</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>272</xloc>
       <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>

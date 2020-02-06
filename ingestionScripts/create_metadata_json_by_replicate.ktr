@@ -491,7 +491,14 @@
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>var sampleObj = {
 	packageID: getVariable("packageID", ""),
+	packageType: getVariable("packageType", ""),
 	replicateID:String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
+	FASTQ_fastQFileName:String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name:")]),
+	FASTQ_fastQFileNamePairedEnd:String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name (Paired End):")]),
+	BAM_bamFileName:String(row[getInputRowMeta().indexOfValue("Associated BAM File Name:")]),
+	Expression_Matrix_barcodesFileName:String(row[getInputRowMeta().indexOfValue("Barcodes File Name:")]),
+	Expression_Matrix_matrixFileName:String(row[getInputRowMeta().indexOfValue("Matrix File Name:")]),
+	Expression_Matrix_genesFileName:String(row[getInputRowMeta().indexOfValue("Genes/Features File Name:")])
 };
 var fieldMapString = getVariable("fieldMap", "");
 var fieldMap = fieldMapString.split("|");
@@ -514,7 +521,8 @@ for(var i = 0; i &lt; fieldMap.length; i++) {
     } else {
 		fieldVal = String(fieldVal);
 	}
-	sampleObj[fieldJsonProperty] = fieldVal;
+	var propertyName = fileType.replace(" ", "_") + "_" + fieldJsonProperty;
+	sampleObj[propertyName] = fieldVal;
 };
 
 var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
@@ -692,6 +700,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>var sampleObj = {
 	packageID: getVariable("packageID", ""),
+	packageType: getVariable("packageType", ""),
 	replicateID:String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
 };
 var fastQFiles = {};
@@ -926,7 +935,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>320</xloc>
+      <xloc>256</xloc>
       <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
