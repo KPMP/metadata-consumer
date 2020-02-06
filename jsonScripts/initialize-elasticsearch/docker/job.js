@@ -67,9 +67,11 @@ async function getFlattenedPackageFiles(package, db) {
         doc.packageId = doc._id;
 
         if(fileCt > 0) {
-          doc.fileId = package.files[i]._id;
-          doc.fileSize = package.files[i].size;
-          doc.fileName = package.files[i].fileName;
+          for(const prop in package.files[i]) {
+            let propName = prop.replace(/^_*(file)*/gi, '');
+            propName = 'file' + propName.charAt(0).toUpperCase() + propName.slice(1);
+            doc[propName] = package.files[i][prop];
+          }
         }
 
         doc.submitterEmail = submitterEmail;
