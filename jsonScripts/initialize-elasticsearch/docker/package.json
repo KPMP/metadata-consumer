@@ -1,8 +1,8 @@
 {
-  "name": "jsonscripts",
+  "name": "initialize-elasticsearch",
   "version": "1.0.0",
   "description": "",
-  "main": "initializeElasticsearch.js",
+  "main": "job.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -10,7 +10,6 @@
   "license": "ISC",
   "dependencies": {
     "assert": "^2.0.0",
-    "dotenv": "^8.2.0",
     "elasticsearch": "^16.6.0",
     "mongodb": "^3.5.2"
   }

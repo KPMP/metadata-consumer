@@ -1,24 +1,27 @@
 const assert = require('assert');
 const MongoClient = require('mongodb').MongoClient;
-require('dotenv').config();
 
+//Ensure we have all required arguments
+let requiredEnvNames = ['ES_HOST', 'ES_LOG', 'ES_VERSION', 'ES_INDEX', 'MONGO_URL', 'MONGO_DBNAME'];
+let missingEnvNames = requiredEnvNames.filter((e) => !process.env.hasOwnProperty(e) || !process.env[e].length);
+
+if(missingEnvNames.length > 0) {
+  console.log('!!! ERROR: Some required env vars are missing, noted with ! below:');
+  for(let i = 0; i < requiredEnvNames.length; i++)  {
+    console.log((missingEnvNames.indexOf(requiredEnvNames[i]) > -1 ? '! ' : '- ') + requiredEnvNames[i]);
+  }
+  process.exit();
+}
+
+//Create an elasticsearch client
 const esClient = new require('elasticsearch').Client({
   host: process.env.ES_HOST,
   log: process.env.ES_LOG,
   apiVersion: process.env.ES_VERSION
 });
 
-//Ensure we have an argument
-if(process.argv.length <= 2) {
-  console.log('Call script like this:');
-  console.log('node initializeElasticsearch.js <index name, like metadata-YYYY-MM-DD> <optional packageId>');
-  process.exit();
-}
-
-const ES_INDEX = process.argv[2];
-const MONGO_URL = process.env.MONGO_URL;
-const MONGO_DBNAME = process.env.MONGO_DBNAME;
-const MONGO_PACKAGE_QUERY = process.argv.length >= 4 ? { _id:process.argv[3] } : { };
+const PACKAGE_ID = process.env.PACKAGE_ID;
+const MONGO_PACKAGE_QUERY = PACKAGE_ID && PACKAGE_ID.length > 0 ? { _id: PACKAGE_ID } : { };
 
 async function getApiCallBody(db) {
   return new Promise((res, rej) => {
@@ -41,9 +44,9 @@ async function getApiCallBody(db) {
 
 async function getFlattenedPackageFiles(package, db) {
   return new Promise((res, rej) => {
-    var output = [];
-    var submitterEmail = 'none';
-    var submitterDisplayName = 'none';
+    let output = [];
+    let submitterEmail = 'none';
+    let submitterDisplayName = 'none';
 
     db.collection('users').findOne({'_id': package.submitter.oid}, (err, submitter) => {
       if(null !== err) {
@@ -78,7 +81,7 @@ async function getFlattenedPackageFiles(package, db) {
         delete doc.submitter;
 
         output.push({
-          index: { _index: ES_INDEX, _type: 'package-metadata', _id: fileCt > 0 ? doc.fileId : doc.packageId }
+          index: { _index: process.env.ES_INDEX, _type: 'package-metadata', _id: fileCt > 0 ? doc.fileId : doc.packageId }
         });
 
         output.push(doc);
@@ -108,13 +111,13 @@ async function insertPackages(body) {
   });
 }
 
-MongoClient.connect(MONGO_URL, {
+MongoClient.connect(process.env.MONGO_URL, {
     'useUnifiedTopology': true,
     'forceServerObjectId' : true
   }, function(err, client) {
   assert.equal(null, err);
   console.log("successfully connected to server");
-  const db = client.db(MONGO_DBNAME);
+  const db = client.db(process.env.MONGO_DBNAME);
   getApiCallBody(db)
     .then(insertPackages)
     .then(() => {
