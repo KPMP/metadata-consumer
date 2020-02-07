@@ -315,7 +315,7 @@
       <attributes/>
       <specification_method>filename</specification_method>
       <trans_object_id/>
-      <filename>C:\Users\zachw\Documents\GitRepos\metadata-consumer\ingestionScripts\get_package_type.ktr</filename>
+      <filename>${Internal.Entry.Current.Directory}/get_package_type.ktr</filename>
       <transname/>
       <arg_from_previous>N</arg_from_previous>
       <params_from_previous>N</params_from_previous>
