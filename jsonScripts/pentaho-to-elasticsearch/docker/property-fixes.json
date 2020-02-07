@@ -1,0 +1,21 @@
+{
+  "replace": {
+    "DNA": "Dna",
+    "RNA": "Rna",
+    "FASTQ": "Fastq",
+    "fastQ": "Fastq",
+    "BAM": "Bam",
+    "Expression_Matrix": "ExpressionMatrix",
+    "ID": "Id",
+    "cDNA": "Cdna",
+    "DNA": "Dna",
+    "QC": "Qc",
+    "UMID": "Umid"
+  },
+  "packagePropertiesOnMetadata": {
+    "packageID": true,
+    "packageType": true,
+    "metadataVersion": true,
+    "replicateID": true
+  }
+}

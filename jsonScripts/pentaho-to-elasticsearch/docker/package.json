@@ -1,0 +1,16 @@
+{
+  "name": "initialize-elasticsearch",
+  "version": "1.0.0",
+  "description": "",
+  "main": "job.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "assert": "^2.0.0",
+    "elasticsearch": "^16.6.0",
+    "mongodb": "^3.5.2"
+  }
+}
