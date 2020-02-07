@@ -15,6 +15,7 @@ LABEL Version=$version
 
 COPY package.json package.json
 COPY job.js job.js
+COPY property-fixes.json property-fixes.json
 
 RUN npm install
 
