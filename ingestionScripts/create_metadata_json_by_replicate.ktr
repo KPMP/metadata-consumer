@@ -492,6 +492,7 @@
         <jsScript_script>var sampleObj = {
 	packageID: getVariable("packageID", ""),
 	packageType: getVariable("packageType", ""),
+	metadataVersion: getVariable("metadataVersion", ""),
 	replicateID:String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
 	FASTQ_fastQFileName:String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name:")]),
 	FASTQ_fastQFileNamePairedEnd:String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name (Paired End):")]),
@@ -701,6 +702,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
         <jsScript_script>var sampleObj = {
 	packageID: getVariable("packageID", ""),
 	packageType: getVariable("packageType", ""),
+	metadataVersion: getVariable("metadataVersion", ""),
 	replicateID:String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
 };
 var fastQFiles = {};
