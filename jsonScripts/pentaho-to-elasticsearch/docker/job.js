@@ -6,6 +6,7 @@ const readFile = util.promisify(fs.readFile);
 require('dotenv').config();
 
 const PROPERTY_FIXES_JSON_PATH = './property-fixes.json';
+const METADATA_DIR = '/data/';
 
 const esClient = new require('elasticsearch').Client({
   host: process.env.ES_HOST,
@@ -14,7 +15,7 @@ const esClient = new require('elasticsearch').Client({
 });
 
 let propertyFixes = null;
-const requiredEnvNames = ['ES_HOST', 'ES_LOG', 'ES_VERSION', 'ES_INDEX', 'MONGO_URL', 'MONGO_DBNAME', 'METADATA_JSON_PATH'];
+const requiredEnvNames = ['ES_HOST', 'ES_LOG', 'ES_VERSION', 'ES_INDEX', 'MONGO_URL', 'MONGO_DBNAME', 'METADATA_FILE'];
 
 function init(requiredEnvNames) {
   return new Promise(async function(res, rej) {
@@ -68,7 +69,7 @@ async function getApiCallBody(db, packageId) {
 async function readMetadataFile() {
   return new Promise(async function(res, rej) {
     try {
-      let metadata = await readFile(process.env.METADATA_JSON_PATH, 'utf8');
+      let metadata = await readFile(METADATA_DIR + process.env.METADATA_FILE, 'utf8');
       metadata = metadata.split(/\r?\n/)
         .filter(function (json) {
           try {
