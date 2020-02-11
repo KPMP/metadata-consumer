@@ -1,0 +1,17 @@
+{
+  "propertyFixes": {
+    "replace": {
+      "cDNA": "Cdna",
+      "DNA": "Dna",
+      "RNA": "Rna",
+      "FASTQ": "Fastq",
+      "fastQ": "Fastq",
+      "BAM": "Bam",
+      "Expression_Matrix": "ExpressionMatrix",
+      "ID": "Id",
+      "QC": "Qc",
+      "UMI": "Umi",
+      "PCR": "Pcr"
+    }
+  }
+}

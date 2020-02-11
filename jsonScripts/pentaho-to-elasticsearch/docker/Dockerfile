@@ -14,8 +14,9 @@ LABEL ImageOS=$imageOS
 LABEL Version=$version
 
 COPY package.json package.json
+COPY common.js common.js
 COPY job.js job.js
-COPY property-fixes.json property-fixes.json
+COPY constants.json constants.json
 
 RUN npm install
 
