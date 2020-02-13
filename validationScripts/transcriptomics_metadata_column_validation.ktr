@@ -1685,7 +1685,7 @@ var outputString = JSON.stringify(output);
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>${Internal.Entry.Current.Directory}/FASTQ_column_count_result</name>
+      <name>${baseDirectory}/${packageDirectory}/${packageID}_FASTQ_column_count_result</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>txt</extention>
@@ -1754,7 +1754,7 @@ var outputString = JSON.stringify(output);
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>${Internal.Entry.Current.Directory}/FASTQ_column_order_result</name>
+      <name>${baseDirectory}/${packageDirectory}/${packageID}_FASTQ_column_order_result</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>txt</extention>
@@ -1823,7 +1823,7 @@ var outputString = JSON.stringify(output);
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>${Internal.Entry.Current.Directory}/FASTQ_field_name_result</name>
+      <name>${baseDirectory}/${packageDirectory}/${packageID}_FASTQ_field_name_result</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>txt</extention>
@@ -3361,7 +3361,7 @@ var outputString = JSON.stringify(output);
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>${Internal.Entry.Current.Directory}/BAM_column_count_result</name>
+      <name>${baseDirectory}/${packageDirectory}/${packageID}_BAM_column_count_result</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>txt</extention>
@@ -3430,7 +3430,7 @@ var outputString = JSON.stringify(output);
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>${Internal.Entry.Current.Directory}/BAM_column_order_result</name>
+      <name>${baseDirectory}/${packageDirectory}/${packageID}_BAM_column_order_result</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>txt</extention>
@@ -3499,7 +3499,7 @@ var outputString = JSON.stringify(output);
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>${Internal.Entry.Current.Directory}/BAM_field_name_result</name>
+      <name>${baseDirectory}/${packageDirectory}/${packageID}_BAM_field_name_result</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>txt</extention>
@@ -4818,7 +4818,7 @@ var outputString = JSON.stringify(output);
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>${Internal.Entry.Current.Directory}/Expression_Matrix_column_count_result</name>
+      <name>${baseDirectory}/${packageDirectory}/${packageID}_Expression_Matrix_column_count_result</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>txt</extention>
@@ -4887,7 +4887,7 @@ var outputString = JSON.stringify(output);
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>${Internal.Entry.Current.Directory}/Expression_Matrix_column_order_result</name>
+      <name>${baseDirectory}/${packageDirectory}/${packageID}_Expression_Matrix_column_order_result</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>txt</extention>
@@ -4956,7 +4956,7 @@ var outputString = JSON.stringify(output);
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>${Internal.Entry.Current.Directory}/Expression_Matrix_field_name_result</name>
+      <name>${baseDirectory}/${packageDirectory}/${packageID}_Expression_Matrix_field_name_result</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>txt</extention>
