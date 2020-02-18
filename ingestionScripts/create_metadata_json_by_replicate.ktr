@@ -430,7 +430,7 @@
     <created_date>2020/02/05 15:17:13.494</created_date>
     <modified_user>-</modified_user>
     <modified_date>2020/02/05 15:17:13.494</modified_date>
-    <key_for_session_key/>
+    <key_for_session_key>H4sIAAAAAAAAAAMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
@@ -447,18 +447,13 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Dummy (do nothing)</from>
-      <to>Generated nested JSON</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Generated nested JSON</from>
       <to>packageID_metadata_nested.json</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Get rows from result</from>
-      <to>Text file output</to>
+      <from>Dummy (do nothing)</from>
+      <to>Generated nested JSON</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -467,11 +462,41 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
+      <from>Get rows from result</from>
+      <to>Text file output</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
       <from>Remove Nulls</from>
       <to>Dummy (do nothing)</to>
       <enabled>Y</enabled>
     </hop>
   </order>
+  <step>
+    <name>Dummy (do nothing)</name>
+    <type>Dummy</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>544</xloc>
+      <yloc>544</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
   <step>
     <name>Generate flat JSON</name>
     <type>ScriptValueMod</type>
@@ -517,7 +542,7 @@ for(var i = 0; i &lt; fieldMap.length; i++) {
 		dataType = metadata.getTypeDesc();
 	}
 	var fieldVal = row[getInputRowMeta().indexOfValue(fieldName)];
-    if (dataType == 'Number' || dataType == 'Integer') {
+    if (fieldVal != null &amp;&amp; (dataType == 'Number' || dataType == 'Integer')) {
 		fieldVal = Number(fieldVal);
     } else {
 		fieldVal = String(fieldVal);
@@ -550,6 +575,167 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
     <GUI>
       <xloc>624</xloc>
       <yloc>608</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Generated nested JSON</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var sampleObj = {
+	packageID: getVariable("packageID", ""),
+	packageType: getVariable("packageType", ""),
+	metadataVersion: getVariable("metadataVersion", ""),
+	replicateID:String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
+};
+var fastQFiles = {};
+var bamFiles = {};
+var expressionMatrixFiles = {};
+var fieldMapString = getVariable("fieldMap", "");
+var fieldMap = fieldMapString.split("|");
+
+for(var i = 0; i &lt; fieldMap.length; i++) {
+	var fieldInfo = fieldMap[i];
+	var dataType = 'String';
+	var fieldArr = fieldInfo.split(",");
+    var fileType = fieldArr[0];
+	var fieldName = fieldArr[1];
+	var fieldJsonProperty = fieldArr[2];
+	var fieldIndex = getInputRowMeta().indexOfValue(fieldName);
+    var metadata = getInputRowMeta().getValueMeta(fieldIndex);
+	if (metadata != null) {
+		dataType = metadata.getTypeDesc();
+	}
+	var fieldVal = row[getInputRowMeta().indexOfValue(fieldName)];
+	
+	if (fieldVal != null) {
+		if (dataType == 'Number' || dataType == 'Integer') {
+			fieldVal = Number(fieldVal);
+    	} else {
+			fieldVal = String(fieldVal);
+		}
+	}
+	
+if (fileType == 'FASTQ') {
+		fastQFiles['fastQFileName'] = String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name:")]);
+		fastQFiles['fastQFileNamePairedEnd'] = String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name (Paired End):")]);
+    	fastQFiles[fieldJsonProperty] = fieldVal;
+	}
+	else if (fileType == 'BAM') {
+		bamFiles['bamFileName'] = String(row[getInputRowMeta().indexOfValue("Associated BAM File Name:")]);
+    	bamFiles[fieldJsonProperty] = fieldVal;
+	}
+	else if (fileType == 'Expression Matrix') {
+		expressionMatrixFiles['barcodesFileName'] = String(row[getInputRowMeta().indexOfValue("Barcodes File Name:")])
+		expressionMatrixFiles['matrixFileName'] = String(row[getInputRowMeta().indexOfValue("Matrix File Name:")])
+		expressionMatrixFiles['genesFileName'] = String(row[getInputRowMeta().indexOfValue("Genes/Features File Name:")])
+    	expressionMatrixFiles[fieldJsonProperty] = fieldVal;
+	}
+	else {
+		sampleObj[fieldJsonProperty] = fieldVal;
+	}
+};
+sampleObj['fastQFiles'] = fastQFiles;
+sampleObj['bamFiles'] = bamFiles;
+sampleObj['expressionMatrixFiles'] = expressionMatrixFiles;
+var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>sampleJson</name>
+        <rename>sampleJson</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>624</xloc>
+      <yloc>448</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Get rows from result</name>
+    <type>RowsFromResult</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <fields>      </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>256</xloc>
+      <yloc>544</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Remove Nulls</name>
+    <type>FilterRows</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <send_true_to>Dummy (do nothing)</send_true_to>
+    <send_false_to/>
+    <compare>
+      <condition>
+        <negated>N</negated>
+        <leftvalue>Replicate ID</leftvalue>
+        <function>IS NOT NULL</function>
+        <rightvalue/>
+      </condition>
+    </compare>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>416</xloc>
+      <yloc>544</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -623,162 +809,6 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
     </GUI>
   </step>
   <step>
-    <name>Remove Nulls</name>
-    <type>FilterRows</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <send_true_to>Dummy (do nothing)</send_true_to>
-    <send_false_to/>
-    <compare>
-      <condition>
-        <negated>N</negated>
-        <leftvalue>Replicate ID</leftvalue>
-        <function>IS NOT NULL</function>
-        <rightvalue/>
-      </condition>
-    </compare>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>416</xloc>
-      <yloc>544</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Dummy (do nothing)</name>
-    <type>Dummy</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>544</xloc>
-      <yloc>544</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Generated nested JSON</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>var sampleObj = {
-	packageID: getVariable("packageID", ""),
-	packageType: getVariable("packageType", ""),
-	metadataVersion: getVariable("metadataVersion", ""),
-	replicateID:String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
-};
-var fastQFiles = {};
-var bamFiles = {};
-var expressionMatrixFiles = {};
-var fieldMapString = getVariable("fieldMap", "");
-var fieldMap = fieldMapString.split("|");
-
-for(var i = 0; i &lt; fieldMap.length; i++) {
-	var fieldInfo = fieldMap[i];
-	var dataType = 'String';
-	var fieldArr = fieldInfo.split(",");
-    var fileType = fieldArr[0];
-	var fieldName = fieldArr[1];
-	var fieldJsonProperty = fieldArr[2];
-	var fieldIndex = getInputRowMeta().indexOfValue(fieldName);
-    var metadata = getInputRowMeta().getValueMeta(fieldIndex);
-	if (metadata != null) {
-		dataType = metadata.getTypeDesc();
-	}
-	var fieldVal = row[getInputRowMeta().indexOfValue(fieldName)];
-    if (dataType == 'Number' || dataType == 'Integer') {
-		fieldVal = Number(fieldVal);
-    } else {
-		fieldVal = String(fieldVal);
-	}
-	if (fileType == 'FASTQ') {
-		fastQFiles['fastQFileName'] = String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name:")]);
-		fastQFiles['fastQFileNamePairedEnd'] = String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name (Paired End):")]);
-    	fastQFiles[fieldJsonProperty] = fieldVal;
-	}
-	else if (fileType == 'BAM') {
-		bamFiles['bamFileName'] = String(row[getInputRowMeta().indexOfValue("Associated BAM File Name:")]);
-    	bamFiles[fieldJsonProperty] = fieldVal;
-	}
-	else if (fileType == 'Expression Matrix') {
-		expressionMatrixFiles['barcodesFileName'] = String(row[getInputRowMeta().indexOfValue("Barcodes File Name:")])
-		expressionMatrixFiles['matrixFileName'] = String(row[getInputRowMeta().indexOfValue("Matrix File Name:")])
-		expressionMatrixFiles['genesFileName'] = String(row[getInputRowMeta().indexOfValue("Genes/Features File Name:")])
-    	expressionMatrixFiles[fieldJsonProperty] = fieldVal;
-	}
-	else {
-		sampleObj[fieldJsonProperty] = fieldVal;
-	}
-};
-sampleObj['fastQFiles'] = fastQFiles;
-sampleObj['bamFiles'] = bamFiles;
-sampleObj['expressionMatrixFiles'] = expressionMatrixFiles;
-var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>sampleJson</name>
-        <rename>sampleJson</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>624</xloc>
-      <yloc>448</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>packageID_metadata_nested.json</name>
     <type>TextFileOutput</type>
     <description/>
@@ -848,32 +878,6 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
     </GUI>
   </step>
   <step>
-    <name>Get rows from result</name>
-    <type>RowsFromResult</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>      </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>256</xloc>
-      <yloc>544</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Text file output</name>
     <type>TextFileOutput</type>
     <description/>
@@ -884,13 +888,13 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <separator>;</separator>
+    <separator>	</separator>
     <enclosure>"</enclosure>
     <enclosure_forced>N</enclosure_forced>
     <enclosure_fix_disabled>N</enclosure_fix_disabled>
     <header>Y</header>
     <footer>N</footer>
-    <format>DOS</format>
+    <format>UNIX</format>
     <compression>None</compression>
     <encoding/>
     <endedLine/>
@@ -898,9 +902,9 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>C:/Users/zachw/Desktop/blahtest</name>
+      <name>${baseDirectory}/${packageDirectory}/${packageID}_test_out2</name>
       <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>N</do_not_open_new_file_init>
+      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
       <extention>txt</extention>
       <append>N</append>
       <split>N</split>
@@ -927,6 +931,426 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
         <length>-1</length>
         <precision>-1</precision>
       </field>
+      <field>
+        <name>Associated FASTQ File Name:</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Associated FASTQ File Name (Paired End):</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Cryosectioning Date</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>RNA Isolation Date</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Tissue Processing Comments</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Bioanalyzer Date</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>RNA Yield</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>RNA Yield Unit</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>RNA Concentration</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>RNA Selection Method</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>RNA Selection Method Other Specify</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>RIN Value</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>DV200 Value</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Library Preparation Date</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Library Starting Concentration</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Library Starting Concentration Unit</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Library Prep Chemistry / Kit</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Library Fragmentation Method</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Number of PCR Cycles cDNA</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>cDNA Library Yield</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>RNA Processing Comments</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Sequencing Center</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Sequencing Platform</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Sequencer Model</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Sequencer Software / Version</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Sequencing Date</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>cDNA Quantity Loaded</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Single / Paired End</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Strand 1 Read Length (bp)</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Strand 2 Read Length (bp)</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Sequencing Number of Cycles</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Sequencing Operator</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Total Raw Reads</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Q30 Score (Percentage)</name>
+        <type>Number</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
+        <name>Sequencing Comments</name>
+        <type>String</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -937,8 +1361,8 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>256</xloc>
-      <yloc>432</yloc>
+      <xloc>416</xloc>
+      <yloc>672</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
