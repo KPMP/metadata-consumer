@@ -462,11 +462,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Get rows from result</from>
-      <to>Text file output</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Remove Nulls</from>
       <to>Dummy (do nothing)</to>
       <enabled>Y</enabled>
@@ -519,12 +514,12 @@
 	packageType: getVariable("packageType", ""),
 	metadataVersion: getVariable("metadataVersion", ""),
 	replicateID:String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
-	FASTQ_fastQFileName:String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name:")]),
-	FASTQ_fastQFileNamePairedEnd:String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name (Paired End):")]),
-	BAM_bamFileName:String(row[getInputRowMeta().indexOfValue("Associated BAM File Name:")]),
-	Expression_Matrix_barcodesFileName:String(row[getInputRowMeta().indexOfValue("Barcodes File Name:")]),
-	Expression_Matrix_matrixFileName:String(row[getInputRowMeta().indexOfValue("Matrix File Name:")]),
-	Expression_Matrix_genesFileName:String(row[getInputRowMeta().indexOfValue("Genes/Features File Name:")])
+	FASTQ_fastQFileName:row[getInputRowMeta().indexOfValue("Associated FASTQ File Name:")]?String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name:")]):null,
+	FASTQ_fastQFileNamePairedEnd:row[getInputRowMeta().indexOfValue("Associated FASTQ File Name (Paired End):")]?String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name (Paired End):")]):null,
+	BAM_bamFileName:row[getInputRowMeta().indexOfValue("Associated BAM File Name:")]?String(row[getInputRowMeta().indexOfValue("Associated BAM File Name:")]):null,
+	Expression_Matrix_barcodesFileName:row[getInputRowMeta().indexOfValue("Barcodes File Name:")]?String(row[getInputRowMeta().indexOfValue("Barcodes File Name:")]):null,
+	Expression_Matrix_matrixFileName:row[getInputRowMeta().indexOfValue("Matrix File Name:")]?String(row[getInputRowMeta().indexOfValue("Matrix File Name:")]):null,
+	Expression_Matrix_genesFileName:row[getInputRowMeta().indexOfValue("Genes/Features File Name:")]?String(row[getInputRowMeta().indexOfValue("Genes/Features File Name:")]):null
 };
 var fieldMapString = getVariable("fieldMap", "");
 var fieldMap = fieldMapString.split("|");
@@ -542,10 +537,12 @@ for(var i = 0; i &lt; fieldMap.length; i++) {
 		dataType = metadata.getTypeDesc();
 	}
 	var fieldVal = row[getInputRowMeta().indexOfValue(fieldName)];
-    if (fieldVal != null &amp;&amp; (dataType == 'Number' || dataType == 'Integer')) {
-		fieldVal = Number(fieldVal);
-    } else {
-		fieldVal = String(fieldVal);
+	if (fieldVal != null) {
+		if (dataType == 'Number' || dataType == 'Integer') {
+			fieldVal = Number(fieldVal);
+    	} else {
+			fieldVal = String(fieldVal);
+		}
 	}
 	var propertyName = fileType.replace(" ", "_") + "_" + fieldJsonProperty;
 	sampleObj[propertyName] = fieldVal;
@@ -630,18 +627,18 @@ for(var i = 0; i &lt; fieldMap.length; i++) {
 	}
 	
 if (fileType == 'FASTQ') {
-		fastQFiles['fastQFileName'] = String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name:")]);
-		fastQFiles['fastQFileNamePairedEnd'] = String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name (Paired End):")]);
+		fastQFiles['fastQFileName'] = row[getInputRowMeta().indexOfValue("Associated FASTQ File Name:")]?String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name:")]):null;
+		fastQFiles['fastQFileNamePairedEnd'] = row[getInputRowMeta().indexOfValue("Associated FASTQ File Name (Paired End):")]?String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name (Paired End):")]):null;
     	fastQFiles[fieldJsonProperty] = fieldVal;
 	}
 	else if (fileType == 'BAM') {
-		bamFiles['bamFileName'] = String(row[getInputRowMeta().indexOfValue("Associated BAM File Name:")]);
+		bamFiles['bamFileName'] = row[getInputRowMeta().indexOfValue("Associated BAM File Name:")]?String(row[getInputRowMeta().indexOfValue("Associated BAM File Name:")]):null;
     	bamFiles[fieldJsonProperty] = fieldVal;
 	}
 	else if (fileType == 'Expression Matrix') {
-		expressionMatrixFiles['barcodesFileName'] = String(row[getInputRowMeta().indexOfValue("Barcodes File Name:")])
-		expressionMatrixFiles['matrixFileName'] = String(row[getInputRowMeta().indexOfValue("Matrix File Name:")])
-		expressionMatrixFiles['genesFileName'] = String(row[getInputRowMeta().indexOfValue("Genes/Features File Name:")])
+		expressionMatrixFiles['barcodesFileName'] = row[getInputRowMeta().indexOfValue("Barcodes File Name:")]?String(row[getInputRowMeta().indexOfValue("Barcodes File Name:")]):null;
+		expressionMatrixFiles['matrixFileName'] = row[getInputRowMeta().indexOfValue("Matrix File Name:")]?String(row[getInputRowMeta().indexOfValue("Matrix File Name:")]):null;
+		expressionMatrixFiles['genesFileName'] = row[getInputRowMeta().indexOfValue("Genes/Features File Name:")]?String(row[getInputRowMeta().indexOfValue("Genes/Features File Name:")]):null;
     	expressionMatrixFiles[fieldJsonProperty] = fieldVal;
 	}
 	else {
@@ -874,495 +871,6 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
     <GUI>
       <xloc>816</xloc>
       <yloc>448</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Text file output</name>
-    <type>TextFileOutput</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <separator>	</separator>
-    <enclosure>"</enclosure>
-    <enclosure_forced>N</enclosure_forced>
-    <enclosure_fix_disabled>N</enclosure_fix_disabled>
-    <header>Y</header>
-    <footer>N</footer>
-    <format>UNIX</format>
-    <compression>None</compression>
-    <encoding/>
-    <endedLine/>
-    <fileNameInField>N</fileNameInField>
-    <fileNameField/>
-    <create_parent_folder>Y</create_parent_folder>
-    <file>
-      <name>${baseDirectory}/${packageDirectory}/${packageID}_test_out2</name>
-      <servlet_output>N</servlet_output>
-      <do_not_open_new_file_init>Y</do_not_open_new_file_init>
-      <extention>txt</extention>
-      <append>N</append>
-      <split>N</split>
-      <haspartno>N</haspartno>
-      <add_date>N</add_date>
-      <add_time>N</add_time>
-      <SpecifyFormat>N</SpecifyFormat>
-      <date_time_format/>
-      <add_to_result_filenames>Y</add_to_result_filenames>
-      <pad>N</pad>
-      <fast_dump>N</fast_dump>
-      <splitevery/>
-    </file>
-    <fields>
-      <field>
-        <name>Replicate ID</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Associated FASTQ File Name:</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Associated FASTQ File Name (Paired End):</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Cryosectioning Date</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>RNA Isolation Date</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Tissue Processing Comments</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Bioanalyzer Date</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>RNA Yield</name>
-        <type>Number</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>RNA Yield Unit</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>RNA Concentration</name>
-        <type>Number</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>RNA Selection Method</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>RNA Selection Method Other Specify</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>RIN Value</name>
-        <type>Number</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>DV200 Value</name>
-        <type>Number</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Library Preparation Date</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Library Starting Concentration</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Library Starting Concentration Unit</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Library Prep Chemistry / Kit</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Library Fragmentation Method</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Number of PCR Cycles cDNA</name>
-        <type>Number</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>cDNA Library Yield</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>RNA Processing Comments</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Sequencing Center</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Sequencing Platform</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Sequencer Model</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Sequencer Software / Version</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Sequencing Date</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>cDNA Quantity Loaded</name>
-        <type>Number</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Single / Paired End</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Strand 1 Read Length (bp)</name>
-        <type>Number</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Strand 2 Read Length (bp)</name>
-        <type>Number</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Sequencing Number of Cycles</name>
-        <type>Number</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Sequencing Operator</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Total Raw Reads</name>
-        <type>Number</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Q30 Score (Percentage)</name>
-        <type>Number</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>Sequencing Comments</name>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>416</xloc>
-      <yloc>672</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
