@@ -1,6 +1,7 @@
 {
   "propertyFixes": {
     "replace": {
+      "_id": "Id",
       "cDNA": "Cdna",
       "DNA": "Dna",
       "RNA": "Rna",

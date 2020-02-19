@@ -1,7 +1,6 @@
 require('dotenv').config();
 
 const MongoClient = require('mongodb').MongoClient;
-const moment = require('moment');
 const fs = require('fs');
 const util = require('util');
 const readFile = util.promisify(fs.readFile);
@@ -66,18 +65,20 @@ async function readMetadataFile(path) {
 
 async function getPackages(predicate, db) {
   return new Promise((res, rej) => {
-    let output = [];
     let packageCollection = db.collection("packages");
     db.collection("packages").find(predicate).toArray(async function(err, docs) {
+      let output = [];
       try {
         if(err) {
           rej(err);
           return;
         }
 
-        docs.forEach(async function(doc) {
-          output.push(await getPackage(doc, db));
-        });
+        for(let i = 0; i < docs.length; i++) {
+          let doc = docs[i];
+          let awaitDoc = await getPackage(doc, db);
+          output.push(awaitDoc);
+        }
 
         res(output);
       }
@@ -108,8 +109,8 @@ async function getPackage(package, db) {
         }
 
         for(prop in package) {
-          let propName = fixPropertyName(prop);
-          doc['package_' + propName] = package[prop];
+          let propName = fixPropertyName(prop, 'package_');
+          doc[propName] = package[prop];
         }
 
         doc.package_submitterEmail = submitterEmail;
@@ -119,7 +120,7 @@ async function getPackage(package, db) {
         delete doc.package_class;
         delete doc.package_submitter;
 
-        res(output);
+        res(doc);
       }
 
       catch(err) {
@@ -132,9 +133,12 @@ async function getPackage(package, db) {
 async function flattenDocument(flatDocument, rawRecord, db, type) {
   return new Promise((res, rej) => {
     try {
+
+      let doc = Object.assign({}, flatDocument);
+
       for(const prop in rawRecord) {
         let propName = fixPropertyName(prop, type);
-        flatDocument[propName] = rawRecord[prop];
+        doc[propName] = rawRecord[prop];
       }
 
       res(doc);
@@ -164,7 +168,12 @@ function fixPropertyName(prop, type) {
     let fixedPropWords = fixedProp.split(/(?=[A-Z])/);
     fixedPropWords.unshift(type);
     for(let i = 0; i < fixedPropWords.length; i++) {
-      if(i == 0 || "_" === fixedPropWords[i - 1].slice(-1)) {
+
+      if(!fixedPropWords[i])  {
+        continue;
+      }
+
+      else if(i == 0 || "_" === fixedPropWords[i - 1].slice(-1)) {
         fixedPropWords[i] = fixedPropWords[i].slice(0,1).toLowerCase() + fixedPropWords[i].slice(1);
       }
     }
@@ -190,7 +199,7 @@ async function postToEsApi(body) {
   });
 }
 
-function run(requiredEnvNames) {
+function run(requiredEnvNames, getEsApiBody) {
   init(requiredEnvNames)
     .then(() => {
       MongoClient.connect(process.env.MONGO_URL, {
@@ -216,3 +225,17 @@ function run(requiredEnvNames) {
       console.log('!!! run failed: ', err);
     });
 }
+
+module.exports = {
+  DATA_DIR,
+  esClient,
+  constants,
+  init,
+  readMetadataFile,
+  getPackages,
+  getPackage,
+  getReplicate,
+  getFile,
+  postToEsApi,
+  run
+};
