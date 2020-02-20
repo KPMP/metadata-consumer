@@ -1,6 +1,6 @@
 FROM node:lts-alpine3.10
 
-ARG imageName="metadata-initialize-elasticsearch-worker"
+ARG imageName="mongodb-packages-to-elasticsearch-worker"
 ARG imageDescription="ETL from Data Lake packages to Elasticsearch"
 ARG imageType="worker"
 ARG imageOS="alpine"
@@ -13,6 +13,8 @@ LABEL ImageType=$imageType
 LABEL ImageOS=$imageOS
 LABEL Version=$version
 
+COPY common.js common.js
+COPY constants.json constants.json
 COPY package.json package.json
 COPY job.js job.js
 

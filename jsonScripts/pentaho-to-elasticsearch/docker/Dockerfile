@@ -13,10 +13,10 @@ LABEL ImageType=$imageType
 LABEL ImageOS=$imageOS
 LABEL Version=$version
 
-COPY package.json package.json
 COPY common.js common.js
-COPY job.js job.js
 COPY constants.json constants.json
+COPY package.json package.json
+COPY job.js job.js
 
 RUN npm install
 

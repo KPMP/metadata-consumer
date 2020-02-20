@@ -3,15 +3,11 @@
 # Usage: ./run.sh <path-to-metadata-json-file>
 # Make sure the dataLake network with mongodb is running first!
 
-# Rebuild the worker image (if necessary) and get the ID
-WORKER_IMAGE=$(cd docker && \
-  docker build --rm -t kingstonduo/pentaho-to-elasticsearch-worker . >/dev/null && \
-  docker images -q kingstonduo/pentaho-to-elasticsearch-worker)
-
 realpath() {
     [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
 }
 
+WORKER_IMAGE=kingstonduo/pentaho-to-elasticsearch-worker:latest
 METADATA_DIR=$(dirname $(realpath "$1"))
 METADATA_FILE=$(basename "$1")
 
