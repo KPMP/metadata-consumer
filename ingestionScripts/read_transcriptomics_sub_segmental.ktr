@@ -1882,15 +1882,15 @@
     <formula>
       <field_name>repcheck1</field_name>
       <formula_string>IF(NOT(ISBLANK([Replicate ID_1]));[Replicate ID_1];[Replicate ID])</formula_string>
-      <value_type>None</value_type>
+      <value_type>String</value_type>
       <value_length>-1</value_length>
       <value_precision>-1</value_precision>
       <replace_field>Replicate ID</replace_field>
     </formula>
     <formula>
       <field_name>repcheck2</field_name>
-      <formula_string>IF(NOT(ISBLANK([Replicate ID_2]));[Replicate ID_2];[Replicate ID])</formula_string>
-      <value_type>None</value_type>
+      <formula_string>IF(NOT(ISBLANK([Replicate ID_1_1]));[Replicate ID_1_1];[Replicate ID])</formula_string>
+      <value_type>String</value_type>
       <value_length>-1</value_length>
       <value_precision>-1</value_precision>
       <replace_field>Replicate ID</replace_field>
