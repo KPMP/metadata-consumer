@@ -537,7 +537,7 @@ for(var i = 0; i &lt; fieldMap.length; i++) {
 		}
 		var fieldVal = row[getInputRowMeta().indexOfValue(fieldName)];
 		if (fieldVal != null) {
-			if (dataType == 'Number' || dataType == 'Integer') {
+			if (dataType == 'Number' || dataType == 'Integer' || !isNaN(fieldVal)) {
 				fieldVal = Number(fieldVal);
     		} else {
 				fieldVal = String(fieldVal);

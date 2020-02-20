@@ -1417,8 +1417,8 @@
       <schema_name/>
     </partitioning>
     <join_type>FULL OUTER</join_type>
-    <step1>Sort rows 3</step1>
-    <step2>Sort rows 4</step2>
+    <step1>Block this step until steps finish 2</step1>
+    <step2>Block this step until steps finish</step2>
     <keys_1>
       <key>Replicate ID</key>
     </keys_1>
