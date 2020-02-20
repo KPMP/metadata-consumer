@@ -1,4 +1,5 @@
 require('dotenv').config();
+const moment = require('moment');
 
 const MongoClient = require('mongodb').MongoClient;
 const fs = require('fs');
@@ -110,7 +111,8 @@ async function getPackage(package, db) {
 
         for(prop in package) {
           let propName = fixPropertyName(prop, 'package_');
-          doc[propName] = package[prop];
+          let fixedValue = fixIfDate(prop, package[prop]);
+          doc[propName] = fixedValue;
         }
 
         doc.package_submitterEmail = submitterEmail;
@@ -138,7 +140,8 @@ async function flattenDocument(flatDocument, rawRecord, db, type) {
 
       for(const prop in rawRecord) {
         let propName = fixPropertyName(prop, type);
-        doc[propName] = rawRecord[prop];
+        let fixedValue = fixIfDate(prop, rawRecord[prop]);
+        doc[propName] = fixedValue;
       }
 
       res(doc);
@@ -184,6 +187,30 @@ function fixPropertyName(prop, type) {
   catch(err) {
     console.error('!!! Error during fixPropertyName: ', err);
   }
+}
+
+function fixIfDate(propName, prop) {
+  if(!propName || !propName.match(new RegExp(".*[dD]ate$", "i"))) {
+    return prop;
+  }
+
+  let formats = [
+    moment.ISO_8601,
+    "YYYY-MM-DD",
+    "YYYY/MM/DD 00:00:00.000"
+  ];
+
+  let date = null;
+
+  for(let i = 0; i < formats.length; i++) {
+    date = moment(prop, formats[i]);
+    console.log(date);
+    if(date.isValid()) {
+      return date.toISOString();
+    }
+  }
+
+  return prop;
 }
 
 async function postToEsApi(body) {

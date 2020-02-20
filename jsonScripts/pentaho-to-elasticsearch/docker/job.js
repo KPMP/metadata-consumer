@@ -22,13 +22,13 @@ async function getEsApiBody(db) {
       }
 
       packages = packages.flatMap((package) => [
-        { index: { _index: 'metadata-packages-' + indexDate }, _type: 'package', _id: package.package_id },
-        package
+        { update: { _index: 'metadata-packages-' + indexDate, _id: package.package_id }},
+        { doc: package, doc_as_upsert: true }
       ]);
 
       replicates = replicates.flatMap((replicate) => [
-        { index: { _index: 'metadata-replicates-' + indexDate }, _type: 'replicate', _id: replicate.replicate_replicateId },
-        replicate
+        { update: { _index: 'metadata-replicates-' + indexDate, _id: replicate.replicate_replicateId }},
+        { doc: replicate, doc_as_upsert: true }
       ]);
 
       res(packages.concat(replicates));

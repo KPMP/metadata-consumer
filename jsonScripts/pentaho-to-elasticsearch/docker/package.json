@@ -1,5 +1,5 @@
 {
-  "name": "initialize-elasticsearch",
+  "name": "pentaho-to-elasticsearch",
   "version": "1.0.0",
   "description": "",
   "main": "job.js",
