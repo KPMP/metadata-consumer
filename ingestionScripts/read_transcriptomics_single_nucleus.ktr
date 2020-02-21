@@ -1096,7 +1096,7 @@
       </field>
       <field>
         <name>Library Starting Concentration</name>
-        <type>Number</type>
+        <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>

@@ -495,10 +495,12 @@ for(var i = 0; i &lt; fieldMap.length; i++) {
 			dataType = metadata.getTypeDesc();
 		}
 		var fieldVal = row[getInputRowMeta().indexOfValue(fieldName)];
-    	if (dataType == 'Number' || dataType == 'Integer') {
-			fieldVal = Number(fieldVal);
-    	} else {
-			fieldVal = String(fieldVal);
+		if (fieldVal != null) {
+			if (dataType == 'Number' || dataType == 'Integer' || !isNaN(fieldVal)) {
+				fieldVal = Number(fieldVal);
+    		} else {
+				fieldVal = String(fieldVal);
+			}
 		}
 		sampleObj[fieldJsonProperty] = fieldVal;	
 	}
@@ -528,7 +530,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
     </remotesteps>
     <GUI>
       <xloc>400</xloc>
-      <yloc>288</yloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
