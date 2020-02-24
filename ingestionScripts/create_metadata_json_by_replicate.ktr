@@ -513,7 +513,7 @@
 	packageID: getVariable("packageID", ""),
 	packageType: getVariable("packageType", ""),
 	metadataVersion: getVariable("metadataVersion", ""),
-	replicateID:String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
+	replicateID:!isNaN(row[getInputRowMeta().indexOfValue("Replicate ID")])?(Number(row[getInputRowMeta().indexOfValue("Replicate ID")])).toString():String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
 	FASTQ_fastQFileName:row[getInputRowMeta().indexOfValue("Associated FASTQ File Name:")]?String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name:")]):null,
 	FASTQ_fastQFileNamePairedEnd:row[getInputRowMeta().indexOfValue("Associated FASTQ File Name (Paired End):")]?String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name (Paired End):")]):null,
 	BAM_bamFileName:row[getInputRowMeta().indexOfValue("Associated BAM File Name:")]?String(row[getInputRowMeta().indexOfValue("Associated BAM File Name:")]):null,
@@ -538,10 +538,10 @@ for(var i = 0; i &lt; fieldMap.length; i++) {
 	}
 	var fieldVal = row[getInputRowMeta().indexOfValue(fieldName)];
 	if (fieldVal != null) {
-		if (dataType == 'Number' || dataType == 'Integer' || !isNaN(fieldVal)) {
+		if (dataType == 'Number' || dataType == 'Integer') {
 			fieldVal = Number(fieldVal);
     	} else {
-			fieldVal = String(fieldVal);
+			fieldVal = !isNaN(fieldVal)?(Number(fieldVal)).toString():String(fieldVal);
 		}
 	}
 	var propertyName = fileType.replace(" ", "_") + "_" + fieldJsonProperty;
@@ -570,7 +570,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>624</xloc>
+      <xloc>608</xloc>
       <yloc>608</yloc>
       <draw>Y</draw>
     </GUI>
@@ -596,7 +596,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
 	packageID: getVariable("packageID", ""),
 	packageType: getVariable("packageType", ""),
 	metadataVersion: getVariable("metadataVersion", ""),
-	replicateID:String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
+	replicateID:!isNaN(row[getInputRowMeta().indexOfValue("Replicate ID")])?(Number(row[getInputRowMeta().indexOfValue("Replicate ID")])).toString():String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
 };
 var fastQFiles = {};
 var bamFiles = {};
@@ -619,10 +619,10 @@ for(var i = 0; i &lt; fieldMap.length; i++) {
 	var fieldVal = row[getInputRowMeta().indexOfValue(fieldName)];
 	
 	if (fieldVal != null) {
-		if (dataType == 'Number' || dataType == 'Integer' || !isNaN(fieldVal)) {
+		if (dataType == 'Number' || dataType == 'Integer') {
 			fieldVal = Number(fieldVal);
     	} else {
-			fieldVal = String(fieldVal);
+			fieldVal = !isNaN(fieldVal)?(Number(fieldVal)).toString():String(fieldVal);
 		}
 	}
 	

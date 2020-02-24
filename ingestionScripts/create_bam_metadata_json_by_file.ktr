@@ -474,7 +474,7 @@
 	packageID: getVariable("packageID", ""),
 	packageType: getVariable("packageType", ""),
 	metadataVersion: getVariable("metadataVersion", ""),
-	replicateID:String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
+	replicateID:!isNaN(row[getInputRowMeta().indexOfValue("Replicate ID")])?(Number(row[getInputRowMeta().indexOfValue("Replicate ID")])).toString():String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
 	fileType:"BAM"
 };
 var fieldMapString = getVariable("fieldMap", "");
@@ -496,10 +496,10 @@ for(var i = 0; i &lt; fieldMap.length; i++) {
 		}
 		var fieldVal = row[getInputRowMeta().indexOfValue(fieldName)];
 		if (fieldVal != null) {
-			if (dataType == 'Number' || dataType == 'Integer' || !isNaN(fieldVal)) {
+			if (dataType == 'Number' || dataType == 'Integer') {
 				fieldVal = Number(fieldVal);
     		} else {
-				fieldVal = String(fieldVal);
+				fieldVal = !isNaN(fieldVal)?(Number(fieldVal)).toString():String(fieldVal);
 			}
 		}
 		sampleObj[fieldJsonProperty] = fieldVal;	
