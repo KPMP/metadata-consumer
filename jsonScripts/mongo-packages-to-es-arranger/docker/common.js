@@ -75,7 +75,7 @@ function extractProperties(document) {
 
 function convertFileToExpressionMatrix(documents) {
       return documents.map((document) => {
-        document.file_name = document.file_id + "_" + "expression_matrix.zip";
+        return {...document, file_name: document.file_id + "_" + "expression_matrix.zip"};
       });
 }
 

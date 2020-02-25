@@ -14,7 +14,7 @@ async function getEsApiBody(db) {
       packages.forEach((package) => {
         packagesForES.push(common.extractProperties(package));
       });
-      //packagesForES = common.convertFileToExpressionMatrix(packagesForES);
+      packagesForES = common.convertFileToExpressionMatrix(packagesForES);
       packagesForES = packagesForES.flatMap((package) => [
         { update: { _index: 'file', _id: package.file_id }},
         { doc: package, doc_as_upsert: true }
