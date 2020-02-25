@@ -1229,7 +1229,7 @@
         <target_step>microRNA</target_step>
       </case>
       <case>
-        <value>Sub-segmental RNA</value>
+        <value>Sub-segmental RNA-Seq</value>
         <target_step>Sub-segmental RNA</target_step>
       </case>
       <case>

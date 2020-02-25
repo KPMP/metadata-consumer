@@ -509,7 +509,7 @@
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>var sampleObj = {
 	packageID: getVariable("packageID", ""),
-	replicateID:String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
+	replicateID:!isNaN(row[getInputRowMeta().indexOfValue("Replicate ID")])?(Number(row[getInputRowMeta().indexOfValue("Replicate ID")])).toString():String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
 	packageType: getVariable("packageType", ""),
 	metadataVersion: getVariable("metadataVersion", ""),
 	fileType:"FASTQ"
@@ -536,10 +536,12 @@ for(var i = 0; i &lt; fieldMap.length; i++) {
 			dataType = metadata.getTypeDesc();
 		}
 		var fieldVal = row[getInputRowMeta().indexOfValue(fieldName)];
-    	if (dataType == 'Number' || dataType == 'Integer') {
-			fieldVal = Number(fieldVal);
-    	} else {
-			fieldVal = String(fieldVal);
+		if (fieldVal != null) {
+			if (dataType == 'Number' || dataType == 'Integer') {
+				fieldVal = Number(fieldVal);
+    		} else {
+				fieldVal = !isNaN(fieldVal)?(Number(fieldVal)).toString():String(fieldVal);
+			}
 		}
 		sampleObj[fieldJsonProperty] = fieldVal;	
 	}
@@ -568,8 +570,8 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>699</xloc>
-      <yloc>433</yloc>
+      <xloc>688</xloc>
+      <yloc>416</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

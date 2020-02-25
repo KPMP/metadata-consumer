@@ -474,7 +474,7 @@
 	packageID: getVariable("packageID", ""),
 	packageType: getVariable("packageType", ""),
 	metadataVersion: getVariable("metadataVersion", ""),
-	replicateID:String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
+	replicateID:!isNaN(row[getInputRowMeta().indexOfValue("Replicate ID")])?(Number(row[getInputRowMeta().indexOfValue("Replicate ID")])).toString():String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
 	fileType:"BAM"
 };
 var fieldMapString = getVariable("fieldMap", "");
@@ -495,10 +495,12 @@ for(var i = 0; i &lt; fieldMap.length; i++) {
 			dataType = metadata.getTypeDesc();
 		}
 		var fieldVal = row[getInputRowMeta().indexOfValue(fieldName)];
-    	if (dataType == 'Number' || dataType == 'Integer') {
-			fieldVal = Number(fieldVal);
-    	} else {
-			fieldVal = String(fieldVal);
+		if (fieldVal != null) {
+			if (dataType == 'Number' || dataType == 'Integer') {
+				fieldVal = Number(fieldVal);
+    		} else {
+				fieldVal = !isNaN(fieldVal)?(Number(fieldVal)).toString():String(fieldVal);
+			}
 		}
 		sampleObj[fieldJsonProperty] = fieldVal;	
 	}
@@ -528,7 +530,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
     </remotesteps>
     <GUI>
       <xloc>400</xloc>
-      <yloc>288</yloc>
+      <yloc>304</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

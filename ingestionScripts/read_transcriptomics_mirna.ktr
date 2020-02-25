@@ -438,33 +438,8 @@
   </notepads>
   <order>
     <hop>
-      <from>Get variables</from>
-      <to>Set variables</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Set variables</from>
-      <to>FASTQ Tab</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Set variables</from>
-      <to>BAM Tab</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Set variables</from>
-      <to>Expression Matrix Tab</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Merge join</from>
       <to>Sort rows 4</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Merge join 2</from>
-      <to>create_metadata_json_by_replicate</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -515,6 +490,16 @@
     <hop>
       <from>Expression Matrix Tab</from>
       <to>Sort rows 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Merge join 2</from>
+      <to>Formula</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Formula</from>
+      <to>create_metadata_json_by_replicate</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -614,7 +599,7 @@
       </field>
       <field>
         <name>Unassigned Reads</name>
-        <type>String</type>
+        <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -626,7 +611,7 @@
       </field>
       <field>
         <name>Uniquely Mapped Reads</name>
-        <type>String</type>
+        <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -638,7 +623,7 @@
       </field>
       <field>
         <name>Uniquely Mapped / Raw Reads (Mapping Rate)</name>
-        <type>String</type>
+        <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -809,7 +794,7 @@
       </field>
       <field>
         <name>Ribosomal Fraction</name>
-        <type>String</type>
+        <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -821,7 +806,7 @@
       </field>
       <field>
         <name>Genes Detected</name>
-        <type>String</type>
+        <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1004,7 +989,7 @@
       </field>
       <field>
         <name>RNA Yield</name>
-        <type>String</type>
+        <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1028,7 +1013,7 @@
       </field>
       <field>
         <name>RNA Concentration</name>
-        <type>String</type>
+        <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1064,7 +1049,7 @@
       </field>
       <field>
         <name>RIN Value</name>
-        <type>String</type>
+        <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1076,7 +1061,7 @@
       </field>
       <field>
         <name>DV200 Value</name>
-        <type>String</type>
+        <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1148,7 +1133,7 @@
       </field>
       <field>
         <name>Number of PCR Cycles cDNA</name>
-        <type>String</type>
+        <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1244,7 +1229,7 @@
       </field>
       <field>
         <name>cDNA Quantity Loaded</name>
-        <type>String</type>
+        <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1268,7 +1253,7 @@
       </field>
       <field>
         <name>Strand 1 Read Length (bp)</name>
-        <type>String</type>
+        <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1280,7 +1265,7 @@
       </field>
       <field>
         <name>Strand 2 Read Length (bp)</name>
-        <type>String</type>
+        <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1292,7 +1277,7 @@
       </field>
       <field>
         <name>Sequencing Number of Cycles</name>
-        <type>String</type>
+        <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1316,7 +1301,7 @@
       </field>
       <field>
         <name>Total Raw Reads</name>
-        <type>String</type>
+        <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1328,7 +1313,7 @@
       </field>
       <field>
         <name>Q30 Score (Percentage)</name>
-        <type>String</type>
+        <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1392,97 +1377,6 @@
     </GUI>
   </step>
   <step>
-    <name>Get variables</name>
-    <type>GetVariable</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>baseDirectory</name>
-        <variable>${baseDirectory}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-      <field>
-        <name>packageDirectory</name>
-        <variable>${packageDirectory}</variable>
-        <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>96</xloc>
-      <yloc>288</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Set variables</name>
-    <type>SetVariable</type>
-    <description/>
-    <distribute>N</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <field_name>baseDirectory</field_name>
-        <variable_name>${baseDirectory}</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-      </field>
-      <field>
-        <field_name>packageDirectory</field_name>
-        <variable_name>${packageDirectory}</variable_name>
-        <variable_type>JVM</variable_type>
-        <default_value/>
-      </field>
-    </fields>
-    <use_formatting>Y</use_formatting>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>224</xloc>
-      <yloc>288</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>Merge join</name>
     <type>MergeJoin</type>
     <description/>
@@ -1493,7 +1387,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <join_type>INNER</join_type>
+    <join_type>FULL OUTER</join_type>
     <step1>Sort rows</step1>
     <step2>Sort rows 2</step2>
     <keys_1>
@@ -1527,7 +1421,7 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <join_type>INNER</join_type>
+    <join_type>FULL OUTER</join_type>
     <step1>Sort rows 4</step1>
     <step2>Sort rows 3</step2>
     <keys_1>
@@ -1719,7 +1613,7 @@
     </GUI>
   </step>
   <step>
-    <name>create_fastq_metadata_json_by_file</name>
+    <name>create_bam_metadata_json_by_file</name>
     <type>TransExecutor</type>
     <description/>
     <distribute>Y</distribute>
@@ -1732,7 +1626,7 @@
     <specification_method>filename</specification_method>
     <trans_object_id/>
     <trans_name/>
-    <filename>${Internal.Entry.Current.Directory}/create_fastq_metadata_json_by_file.ktr</filename>
+    <filename>${Internal.Entry.Current.Directory}/create_bam_metadata_json_by_file.ktr</filename>
     <directory_path/>
     <group_size/>
     <group_field/>
@@ -1769,7 +1663,7 @@
     </remotesteps>
     <GUI>
       <xloc>400</xloc>
-      <yloc>80</yloc>
+      <yloc>384</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1829,6 +1723,61 @@
     </GUI>
   </step>
   <step>
+    <name>create_fastq_metadata_json_by_file</name>
+    <type>TransExecutor</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <specification_method>filename</specification_method>
+    <trans_object_id/>
+    <trans_name/>
+    <filename>${Internal.Entry.Current.Directory}/create_fastq_metadata_json_by_file.ktr</filename>
+    <directory_path/>
+    <group_size/>
+    <group_field/>
+    <group_time/>
+    <parameters>
+      <inherit_all_vars>Y</inherit_all_vars>
+    </parameters>
+    <execution_result_target_step/>
+    <execution_time_field>ExecutionTime</execution_time_field>
+    <execution_result_field>ExecutionResult</execution_result_field>
+    <execution_errors_field>ExecutionNrErrors</execution_errors_field>
+    <execution_lines_read_field>ExecutionLinesRead</execution_lines_read_field>
+    <execution_lines_written_field>ExecutionLinesWritten</execution_lines_written_field>
+    <execution_lines_input_field>ExecutionLinesInput</execution_lines_input_field>
+    <execution_lines_output_field>ExecutionLinesOutput</execution_lines_output_field>
+    <execution_lines_rejected_field>ExecutionLinesRejected</execution_lines_rejected_field>
+    <execution_lines_updated_field>ExecutionLinesUpdated</execution_lines_updated_field>
+    <execution_lines_deleted_field>ExecutionLinesDeleted</execution_lines_deleted_field>
+    <execution_files_retrieved_field>ExecutionFilesRetrieved</execution_files_retrieved_field>
+    <execution_exit_status_field>ExecutionExitStatus</execution_exit_status_field>
+    <execution_log_text_field>ExecutionLogText</execution_log_text_field>
+    <execution_log_channelid_field>ExecutionLogChannelId</execution_log_channelid_field>
+    <result_rows_target_step/>
+    <result_files_target_step/>
+    <result_files_file_name_field>FileName</result_files_file_name_field>
+    <executors_output_step/>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>400</xloc>
+      <yloc>80</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
     <name>create_metadata_json_by_replicate</name>
     <type>TransExecutor</type>
     <description/>
@@ -1878,52 +1827,38 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1008</xloc>
+      <xloc>1040</xloc>
       <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>create_bam_metadata_json_by_file</name>
-    <type>TransExecutor</type>
+    <name>Formula</name>
+    <type>Formula</type>
     <description/>
-    <distribute>Y</distribute>
+    <distribute>N</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <specification_method>filename</specification_method>
-    <trans_object_id/>
-    <trans_name/>
-    <filename>${Internal.Entry.Current.Directory}/create_bam_metadata_json_by_file.ktr</filename>
-    <directory_path/>
-    <group_size/>
-    <group_field/>
-    <group_time/>
-    <parameters>
-      <inherit_all_vars>Y</inherit_all_vars>
-    </parameters>
-    <execution_result_target_step/>
-    <execution_time_field>ExecutionTime</execution_time_field>
-    <execution_result_field>ExecutionResult</execution_result_field>
-    <execution_errors_field>ExecutionNrErrors</execution_errors_field>
-    <execution_lines_read_field>ExecutionLinesRead</execution_lines_read_field>
-    <execution_lines_written_field>ExecutionLinesWritten</execution_lines_written_field>
-    <execution_lines_input_field>ExecutionLinesInput</execution_lines_input_field>
-    <execution_lines_output_field>ExecutionLinesOutput</execution_lines_output_field>
-    <execution_lines_rejected_field>ExecutionLinesRejected</execution_lines_rejected_field>
-    <execution_lines_updated_field>ExecutionLinesUpdated</execution_lines_updated_field>
-    <execution_lines_deleted_field>ExecutionLinesDeleted</execution_lines_deleted_field>
-    <execution_files_retrieved_field>ExecutionFilesRetrieved</execution_files_retrieved_field>
-    <execution_exit_status_field>ExecutionExitStatus</execution_exit_status_field>
-    <execution_log_text_field>ExecutionLogText</execution_log_text_field>
-    <execution_log_channelid_field>ExecutionLogChannelId</execution_log_channelid_field>
-    <result_rows_target_step/>
-    <result_files_target_step/>
-    <result_files_file_name_field>FileName</result_files_file_name_field>
-    <executors_output_step/>
+    <formula>
+      <field_name>repcheck1</field_name>
+      <formula_string>IF(NOT(ISBLANK([Replicate ID_1]));[Replicate ID_1];[Replicate ID])</formula_string>
+      <value_type>None</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <replace_field>Replicate ID</replace_field>
+    </formula>
+    <formula>
+      <field_name>repcheck2</field_name>
+      <formula_string>IF(NOT(ISBLANK([Replicate ID_2]));[Replicate ID_2];[Replicate ID])</formula_string>
+      <value_type>None</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <replace_field>Replicate ID</replace_field>
+    </formula>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1933,8 +1868,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>400</xloc>
-      <yloc>384</yloc>
+      <xloc>896</xloc>
+      <yloc>448</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
