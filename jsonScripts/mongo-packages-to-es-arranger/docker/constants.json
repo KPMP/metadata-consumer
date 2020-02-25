@@ -1,0 +1,30 @@
+{
+  "propertyFixes": {
+    "replace": {
+      "_id": "Id",
+      "cDNA": "Cdna",
+      "DNA": "Dna",
+      "RNA": "Rna",
+      "FASTQ": "Fastq",
+      "fastQ": "Fastq",
+      "BAM": "Bam",
+      "Expression_Matrix": "ExpressionMatrix",
+      "ID": "Id",
+      "QC": "Qc",
+      "UMI": "Umi",
+      "PCR": "Pcr"
+    }
+  },
+  "includeProps": {
+    "_id": {"propertyName" : "file_id" , "default" : ""},
+    "fileName": {"propertyName" : "file_name" , "default" : ""},
+    "dataCategory": {"propertyName" : "data_category" , "default" : ""},
+    "dataFormat": {"propertyName" : "data_format" , "default" : ""},
+    "size": {"propertyName" : "file_size" , "default" : ""},
+    "experimentalStrategy": {"propertyName" : "experimental_strategy" , "default" : ""},
+    "access": {"propertyName" : "access" , "default" : "open"},
+    "dataType": {"propertyName" : "data_type" , "default" : ""},
+    "project": {"propertyName" : "project" , "default" : "Pilot 1"},
+    "subjectId": {"propertyName" : "sample_id" , "default" : ""}
+  }
+}
