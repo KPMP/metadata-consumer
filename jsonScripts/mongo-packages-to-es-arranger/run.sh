@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Usage: ./run.sh <optional-package-id>
+# Usage: ./run.sh
 # Make sure the dataLake network with mongodb is running first!
 
 WORKER_IMAGE=kingstonduo/mongo-packages-to-es-arranger:latest
