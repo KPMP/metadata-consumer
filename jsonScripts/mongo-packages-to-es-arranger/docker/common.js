@@ -36,7 +36,6 @@ async function init(requiredEnvNames) {
 
 async function getPackages(predicate, db) {
   return new Promise((res, rej) => {
-    let packageCollection = db.collection("packages");
     db.collection("packages").find(predicate).toArray(async function(err, docs) {
       let output = [];
       try {

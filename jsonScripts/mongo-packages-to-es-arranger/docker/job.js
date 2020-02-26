@@ -6,7 +6,6 @@ async function getEsApiBody(db) {
     try {
       let predicate = { promoted: true };
       let packages = await common.getPackages(predicate, db);
-      let indexDate = moment(new Date()).format("YYYY-MM-DD");
 
       let packagesForES = [];
       packages.forEach((package) => {
