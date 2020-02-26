@@ -8,9 +8,6 @@ const readFile = util.promisify(fs.readFile);
 
 const CONSTANTS_PATH = './constants.json';
 const DATA_DIR = '/data/';
-const PACKAGE_PROPS = 'package_';
-const REPLICATE_PROPS = 'replicate_';
-const FILE_PROPS = 'file_';
 
 const esClient = new require('elasticsearch').Client({
   host: process.env.ES_HOST,
@@ -103,6 +100,18 @@ function fixIfDate(propName, prop) {
   return prop;
 }
 
+async function createEsIndex(indexName, body) {
+  return new Promise((res, rej) => {
+    esClient.indices.create({ index: indexName, body: body }, (err, result) => {
+      if (err)  {
+        rej(err);
+        return;
+      }
+      res();
+    });
+  });
+}
+
 async function postToEsApi(body) {
   return new Promise((res, rej) => {
     esClient.bulk({ body }, (err, result) => {
@@ -128,9 +137,9 @@ function run(requiredEnvNames, getEsApiBody) {
             throw(err);
             return;
           }
-
           const db = client.db(process.env.MONGO_DBNAME);
           getEsApiBody(db)
+              .then(createEsIndex("file", constants.arrangerIndexMapping))
             .then(postToEsApi)
             .then(() => {
               client.close();
@@ -149,6 +158,7 @@ module.exports = {
   constants,
   init,
   getPackages,
+  createEsIndex,
   postToEsApi,
   extractProperties,
   convertFileToExpressionMatrix,

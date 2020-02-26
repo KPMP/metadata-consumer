@@ -26,5 +26,23 @@
     "dataType": {"propertyName" : "data_type" , "default" : ""},
     "project": {"propertyName" : "project" , "default" : "Pilot 1"},
     "subjectId": {"propertyName" : "sample_id" , "default" : ""}
+  },
+  "arrangerIndexMapping": {
+    "settings" : {
+      "number_of_shards" : 1
+    },
+    "mappings":
+      { "properties": { "file_name": { "type": "keyword" },
+        "data_category": { "type": "keyword" },
+        "data_format": { "type": "keyword" },
+        "file_size": { "type": "keyword" },
+        "experimental_strategy": { "type": "keyword" },
+        "access": { "type": "keyword" },
+        "file_id": { "type": "keyword" },
+        "data_type": { "type": "keyword" },
+        "project": { "type": "keyword" },
+        "sample_id": { "type": "keyword" }
+      }
+    }
   }
 }
