@@ -158,7 +158,6 @@ module.exports = {
   constants,
   init,
   getPackages,
-  createEsIndex,
   postToEsApi,
   extractProperties,
   convertFileToExpressionMatrix,

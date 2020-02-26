@@ -18,12 +18,12 @@
   "includeProps": {
     "_id": {"propertyName" : "file_id" , "default" : ""},
     "fileName": {"propertyName" : "file_name" , "default" : ""},
-    "dataCategory": {"propertyName" : "data_category" , "default" : ""},
-    "dataFormat": {"propertyName" : "data_format" , "default" : ""},
+    "dataCategory": {"propertyName" : "data_category" , "default" : "Molecular"},
+    "dataFormat": {"propertyName" : "data_format" , "default" : "expression matrix"},
     "size": {"propertyName" : "file_size" , "default" : ""},
-    "experimentalStrategy": {"propertyName" : "experimental_strategy" , "default" : ""},
+    "packageType": {"propertyName" : "experimental_strategy" , "default" : ""},
     "access": {"propertyName" : "access" , "default" : "open"},
-    "dataType": {"propertyName" : "data_type" , "default" : ""},
+    "dataType": {"propertyName" : "data_type" , "default" : "Transcriptomics"},
     "project": {"propertyName" : "project" , "default" : "Pilot 1"},
     "subjectId": {"propertyName" : "sample_id" , "default" : ""}
   },

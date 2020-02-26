@@ -1,8 +1,6 @@
 const common = require('./common.js');
 const moment = require('moment');
 
-const PACKAGE_ID = process.env.PACKAGE_ID;
-
 async function getEsApiBody(db) {
   return new Promise(async function(res, rej) {
     try {

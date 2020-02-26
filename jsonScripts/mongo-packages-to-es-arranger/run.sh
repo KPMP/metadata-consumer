@@ -6,4 +6,4 @@
 WORKER_IMAGE=kingstonduo/mongo-packages-to-es-arranger:latest
 
 # Run the container with passed arguments
-docker run --env-file=.env --env PACKAGE_ID=$1 --network=dataLake $WORKER_IMAGE
+docker run --env-file=.env --network=dataLake $WORKER_IMAGE
