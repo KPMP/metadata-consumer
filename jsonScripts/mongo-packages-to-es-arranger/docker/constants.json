@@ -1,0 +1,48 @@
+{
+  "propertyFixes": {
+    "replace": {
+      "_id": "Id",
+      "cDNA": "Cdna",
+      "DNA": "Dna",
+      "RNA": "Rna",
+      "FASTQ": "Fastq",
+      "fastQ": "Fastq",
+      "BAM": "Bam",
+      "Expression_Matrix": "ExpressionMatrix",
+      "ID": "Id",
+      "QC": "Qc",
+      "UMI": "Umi",
+      "PCR": "Pcr"
+    }
+  },
+  "includeProps": {
+    "_id": {"propertyName" : "file_id" , "default" : ""},
+    "fileName": {"propertyName" : "file_name" , "default" : ""},
+    "dataCategory": {"propertyName" : "data_category" , "default" : "Molecular"},
+    "dataFormat": {"propertyName" : "data_format" , "default" : "expression matrix"},
+    "size": {"propertyName" : "file_size" , "default" : ""},
+    "packageType": {"propertyName" : "experimental_strategy" , "default" : ""},
+    "access": {"propertyName" : "access" , "default" : "open"},
+    "dataType": {"propertyName" : "data_type" , "default" : "Transcriptomics"},
+    "project": {"propertyName" : "project" , "default" : "Pilot 1"},
+    "subjectId": {"propertyName" : "sample_id" , "default" : ""}
+  },
+  "arrangerIndexMapping": {
+    "settings" : {
+      "number_of_shards" : 1
+    },
+    "mappings":
+      { "properties": { "file_name": { "type": "keyword" },
+        "data_category": { "type": "keyword" },
+        "data_format": { "type": "keyword" },
+        "file_size": { "type": "keyword" },
+        "experimental_strategy": { "type": "keyword" },
+        "access": { "type": "keyword" },
+        "file_id": { "type": "keyword" },
+        "data_type": { "type": "keyword" },
+        "project": { "type": "keyword" },
+        "sample_id": { "type": "keyword" }
+      }
+    }
+  }
+}
