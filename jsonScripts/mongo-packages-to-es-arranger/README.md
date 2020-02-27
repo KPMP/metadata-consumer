@@ -17,6 +17,8 @@ In order to run me you will need to:
 1) Copy .env.example to .env
 2) Update your .env to match your environment (you may not need to change anything, but verify)
 3) Ensure you have the dataLake running so it can access the dataLake mongo store
+3a) Ensure you have marked the packages you want promoted with "promoted: true" in the packages collection
+3b) Make sure you have created any necessary zip files and added a record to "packagePortalData" collection as described above
 4) ./run.sh 
 
 The bash file run.sh builds the docker container and launches it.
