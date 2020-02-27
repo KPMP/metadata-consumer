@@ -9,6 +9,8 @@ const readFile = util.promisify(fs.readFile);
 const CONSTANTS_PATH = './constants.json';
 const DATA_DIR = '/data/';
 
+const CREATE_INDEX = (process.env.CREATE_INDEX == "Y");
+
 const esClient = new require('elasticsearch').Client({
   host: process.env.ES_HOST,
   log: process.env.ES_LOG,
@@ -45,7 +47,9 @@ async function getPackages(predicate, db) {
         }
 
         for(let i = 0; i < docs.length; i++) {
-          output.push(docs[i]);
+            let doc = docs[i];
+          let packageInfo = await getPackageInfo(doc, db);
+          output.push(Object.assign(doc, packageInfo));
         }
 
         res(output);
@@ -56,6 +60,23 @@ async function getPackages(predicate, db) {
       }
     });
   });
+}
+
+async function getPackageInfo(package, db) {
+    return new Promise((res, rej) => {
+        db.collection('packagePortalData').findOne({'packageId': package._id}, async function (err, packageInfo) {
+            try {
+                if(err) {
+                    rej(err);
+                    return;
+                }
+               res(packageInfo);
+            }
+            catch(err) {
+                rej(err);
+            }
+        });
+    });
 }
 
 function extractProperties(document) {
@@ -138,7 +159,7 @@ function run(requiredEnvNames, getEsApiBody) {
           }
           const db = client.db(process.env.MONGO_DBNAME);
           getEsApiBody(db)
-              .then(createEsIndex("file", constants.arrangerIndexMapping))
+              .then(CREATE_INDEX && createEsIndex("file", constants.arrangerIndexMapping))
             .then(postToEsApi)
             .then(() => {
               client.close();
