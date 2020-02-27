@@ -20,7 +20,7 @@
     "fileName": {"propertyName" : "file_name" , "default" : ""},
     "dataCategory": {"propertyName" : "data_category" , "default" : "Molecular"},
     "dataFormat": {"propertyName" : "data_format" , "default" : "expression matrix"},
-    "size": {"propertyName" : "file_size" , "default" : ""},
+    "zipFileSize": {"propertyName" : "file_size" , "default" : ""},
     "packageType": {"propertyName" : "experimental_strategy" , "default" : ""},
     "access": {"propertyName" : "access" , "default" : "open"},
     "dataType": {"propertyName" : "data_type" , "default" : "Transcriptomics"},
