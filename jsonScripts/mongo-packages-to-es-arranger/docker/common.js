@@ -49,7 +49,7 @@ async function getPackages(predicate, db) {
         for(let i = 0; i < docs.length; i++) {
             let doc = docs[i];
           let packageInfo = await getPackageInfo(doc, db);
-          output.push(Object.assign(doc, packageInfo));
+          output.push(Object.assign(packageInfo, doc));
         }
 
         res(output);
