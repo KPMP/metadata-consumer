@@ -443,11 +443,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Clone row</from>
-      <to>Create Expression Matrix JSON</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Create Expression Matrix JSON</from>
       <to>packageID_metadata_per_file.json</to>
       <enabled>Y</enabled>
@@ -455,6 +450,46 @@
     <hop>
       <from>Get rows from result</from>
       <to>Remove Nulls</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Clone row</from>
+      <to>Stream lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Get file names</from>
+      <to>Stream lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Stream lookup</from>
+      <to>Stream lookup 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Get file names</from>
+      <to>Stream lookup 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Stream lookup 2</from>
+      <to>Stream lookup 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Get file names</from>
+      <to>Stream lookup 3</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Stream lookup 3</from>
+      <to>Generate UUID</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Generate UUID</from>
+      <to>Create Expression Matrix JSON</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -485,7 +520,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>448</xloc>
+      <xloc>416</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
@@ -512,7 +547,7 @@
 	packageType: getVariable("packageType", ""),
 	metadataVersion: getVariable("metadataVersion", ""),
 	replicateID:!isNaN(row[getInputRowMeta().indexOfValue("Replicate ID")])?(Number(row[getInputRowMeta().indexOfValue("Replicate ID")])).toString():String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
-	fileType:"Expression Matrix"
+	_id:fileUUID
 };
 var fieldMapString = getVariable("fieldMap", "");
 var fieldMap = fieldMapString.split("|");
@@ -526,11 +561,17 @@ for(var i = 0; i &lt; fieldMap.length; i++) {
 	var fieldJsonProperty = fieldArr[2];
     if (fileType == 'Expression Matrix') {
 		if (cloneRow == 0) {
-			sampleObj['fileName'] = String(row[getInputRowMeta().indexOfValue("Barcodes File Name:")])
+			sampleObj['fileType'] = "Expression Matrix Barcodes";
+			sampleObj['fileName'] = String(row[getInputRowMeta().indexOfValue("Barcodes File Name:")]);
+			sampleObj['size'] = barCodeFileSize;
 		} else if (cloneRow == 1) {
-			sampleObj['fileName'] = String(row[getInputRowMeta().indexOfValue("Matrix File Name:")])
+			sampleObj['fileType'] = "Expression Matrix";
+			sampleObj['fileName'] = String(row[getInputRowMeta().indexOfValue("Matrix File Name:")]);
+			sampleObj['size'] = matrixFileSize;
 		} else {
+			sampleObj['fileType'] = "Expression Matrix Genes/Features";
 			sampleObj['fileName'] = String(row[getInputRowMeta().indexOfValue("Genes/Features File Name:")])
+			sampleObj['size'] = genesFileSize;
 		}
 		var fieldIndex = getInputRowMeta().indexOfValue(fieldName);
     	var metadata = getInputRowMeta().getValueMeta(fieldIndex);
@@ -572,7 +613,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>576</xloc>
+      <xloc>1040</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
@@ -598,7 +639,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>192</xloc>
+      <xloc>144</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
@@ -633,7 +674,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>304</xloc>
+      <xloc>272</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>
@@ -702,7 +743,211 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>800</xloc>
+      <xloc>1216</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Get file names</name>
+    <type>GetFileNames</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <doNotFailIfNoFile>N</doNotFailIfNoFile>
+    <rownum>N</rownum>
+    <isaddresult>Y</isaddresult>
+    <filefield>N</filefield>
+    <rownum_field/>
+    <filename_Field/>
+    <wildcard_Field/>
+    <exclude_wildcard_Field/>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <limit>0</limit>
+    <file>
+      <name>${baseDirectory}/${packageDirectory}</name>
+      <filemask/>
+      <exclude_filemask>METADATA_.*.xlsx</exclude_filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>608</xloc>
+      <yloc>128</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Stream lookup</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>Get file names</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>Barcodes File Name:</name>
+        <field>short_filename</field>
+      </key>
+      <value>
+        <name>size</name>
+        <rename>barCodeFileSize</rename>
+        <default/>
+        <type>Number</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>528</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Stream lookup 2</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>Get file names</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>Matrix File Name:</name>
+        <field>short_filename</field>
+      </key>
+      <value>
+        <name>size</name>
+        <rename>matrixFileSize</rename>
+        <default/>
+        <type>Number</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>640</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Stream lookup 3</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>Get file names</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>N</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>Genes/Features File Name:</name>
+        <field>short_filename</field>
+      </key>
+      <value>
+        <name>size</name>
+        <rename>genesFileSize</rename>
+        <default/>
+        <type>Number</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>752</xloc>
+      <yloc>288</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Generate UUID</name>
+    <type>Janino</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <formula>
+      <field_name>fileUUID</field_name>
+      <formula_string>java.util.UUID.randomUUID().toString()</formula_string>
+      <value_type>String</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <replace_field/>
+    </formula>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>880</xloc>
       <yloc>288</yloc>
       <draw>Y</draw>
     </GUI>

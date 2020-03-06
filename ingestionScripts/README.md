@@ -6,7 +6,7 @@ The following variables need to be set in the metadata_ingestion job:
 * baseDirectory: the directory holding all of the packages
 * packageDirectory: the directory with the specific package being ingested
 
-The ingestion script expects the metadata file to start with "METADATA_".
+The ingestion script expects the metadata file to start with "METADATA_". The ingestion script will also read in a list of all of the files (except the METADATA_* file) in the "packageDirectory" and lookup the file size based on the file name provided in the metadata.
 
 ## Output
 

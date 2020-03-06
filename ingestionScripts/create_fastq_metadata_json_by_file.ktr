@@ -443,11 +443,6 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Clone row</from>
-      <to>Create FASTQ JSON</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Create FASTQ JSON</from>
       <to>packageID_metadata_per_file.json</to>
       <enabled>Y</enabled>
@@ -455,6 +450,36 @@
     <hop>
       <from>Get rows from result</from>
       <to>Remove Nulls</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Generate UUID</from>
+      <to>Create FASTQ JSON</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Clone row</from>
+      <to>Stream lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Get file names</from>
+      <to>Stream lookup</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Stream lookup</from>
+      <to>Stream lookup 2</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Stream lookup 2</from>
+      <to>Generate UUID</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Get file names</from>
+      <to>Stream lookup 2</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -485,8 +510,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>571</xloc>
-      <yloc>433</yloc>
+      <xloc>496</xloc>
+      <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -512,7 +537,7 @@
 	replicateID:!isNaN(row[getInputRowMeta().indexOfValue("Replicate ID")])?(Number(row[getInputRowMeta().indexOfValue("Replicate ID")])).toString():String(row[getInputRowMeta().indexOfValue("Replicate ID")]),
 	packageType: getVariable("packageType", ""),
 	metadataVersion: getVariable("metadataVersion", ""),
-	fileType:"FASTQ"
+	_id:fileUUID
 };
 var fieldMapString = getVariable("fieldMap", "");
 var fieldMap = fieldMapString.split("|");
@@ -526,9 +551,13 @@ for(var i = 0; i &lt; fieldMap.length; i++) {
 	var fieldJsonProperty = fieldArr[2];
     if (fileType == 'FASTQ') {
 		if (cloneRow == 0) {
-			sampleObj['fileName'] = String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name:")])
+			sampleObj['fileType'] = "FASTQ";
+			sampleObj['fileName'] = String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name:")]);
+			sampleObj['size'] = fqFileSize;
 		} else {
-			sampleObj['fileName'] = String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name (Paired End):")])
+			sampleObj['fileType'] = "FASTQ Paired End";
+			sampleObj['fileName'] = String(row[getInputRowMeta().indexOfValue("Associated FASTQ File Name (Paired End):")]);
+			sampleObj['size'] = fqPeFileSize;
 		}
 		var fieldIndex = getInputRowMeta().indexOfValue(fieldName);
     	var metadata = getInputRowMeta().getValueMeta(fieldIndex);
@@ -570,8 +599,8 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>688</xloc>
-      <yloc>416</yloc>
+      <xloc>1024</xloc>
+      <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -596,7 +625,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>272</xloc>
+      <xloc>224</xloc>
       <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
@@ -631,8 +660,8 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>427</xloc>
-      <yloc>433</yloc>
+      <xloc>368</xloc>
+      <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -700,7 +729,169 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       </output>
     </remotesteps>
     <GUI>
-      <xloc>896</xloc>
+      <xloc>1232</xloc>
+      <yloc>432</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Generate UUID</name>
+    <type>Janino</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <formula>
+      <field_name>fileUUID</field_name>
+      <formula_string>java.util.UUID.randomUUID().toString()</formula_string>
+      <value_type>String</value_type>
+      <value_length>-1</value_length>
+      <value_precision>-1</value_precision>
+      <replace_field/>
+    </formula>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>880</xloc>
+      <yloc>432</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Get file names</name>
+    <type>GetFileNames</type>
+    <description/>
+    <distribute>N</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <filter>
+      <filterfiletype>all_files</filterfiletype>
+    </filter>
+    <doNotFailIfNoFile>N</doNotFailIfNoFile>
+    <rownum>N</rownum>
+    <isaddresult>Y</isaddresult>
+    <filefield>N</filefield>
+    <rownum_field/>
+    <filename_Field/>
+    <wildcard_Field/>
+    <exclude_wildcard_Field/>
+    <dynamic_include_subfolders>N</dynamic_include_subfolders>
+    <limit>0</limit>
+    <file>
+      <name>${baseDirectory}/${packageDirectory}</name>
+      <filemask/>
+      <exclude_filemask>METADATA_.*.xlsx</exclude_filemask>
+      <file_required>N</file_required>
+      <include_subfolders>N</include_subfolders>
+    </file>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>672</xloc>
+      <yloc>272</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Stream lookup</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>Get file names</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>Y</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>Associated FASTQ File Name:</name>
+        <field>short_filename</field>
+      </key>
+      <value>
+        <name>size</name>
+        <rename>fqFileSize</rename>
+        <default/>
+        <type>Number</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>608</xloc>
+      <yloc>432</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Stream lookup 2</name>
+    <type>StreamLookup</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <from>Get file names</from>
+    <input_sorted>N</input_sorted>
+    <preserve_memory>Y</preserve_memory>
+    <sorted_list>Y</sorted_list>
+    <integer_pair>N</integer_pair>
+    <lookup>
+      <key>
+        <name>Associated FASTQ File Name (Paired End):</name>
+        <field>short_filename</field>
+      </key>
+      <value>
+        <name>size</name>
+        <rename>fqPeFileSize</rename>
+        <default/>
+        <type>Number</type>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>752</xloc>
       <yloc>432</yloc>
       <draw>Y</draw>
     </GUI>
