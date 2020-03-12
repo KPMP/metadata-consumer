@@ -4,5 +4,5 @@
 cd docker
 docker build --rm -t kingstonduo/files-json-to-mongo .
 
-#docker push kingstonduo/files-json-to-mongo
+docker push kingstonduo/files-json-to-mongo
 
