@@ -1,0 +1,17 @@
+{
+  "name": "files-json-to-mongo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "job.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "elasticsearch": "^16.6.0",
+    "mongodb": "^3.5.2",
+    "dotenv": "^8.2.0",
+    "moment": "^2.24.0"
+  }
+}
