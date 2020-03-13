@@ -159,8 +159,7 @@ function run(requiredEnvNames, getEsApiBody) {
           }
           const db = client.db(process.env.MONGO_DBNAME);
           getEsApiBody(db)
-              .then(CREATE_INDEX && createEsIndex("file", constants.arrangerIndexMapping))
-            .then(postToEsApi)
+            .then((response) => console.log(response))
             .then(() => {
               client.close();
               process.exit();
