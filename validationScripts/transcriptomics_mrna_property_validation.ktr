@@ -1795,6 +1795,18 @@
     </file>
     <fields>
       <field>
+        <name>Replicate ID</name>
+        <type>None</type>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+        <nullif/>
+        <trim_type>none</trim_type>
+        <length>-1</length>
+        <precision>-1</precision>
+      </field>
+      <field>
         <name>numErrors</name>
         <type>Integer</type>
         <format>####0;-####0</format>
