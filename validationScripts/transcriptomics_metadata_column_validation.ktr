@@ -772,63 +772,48 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Merge join 2</from>
-      <to>Select values 4</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Merge join</from>
-      <to>Select values 4 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Merge join 2 2</from>
-      <to>Select values 4 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Merge join 3</from>
-      <to>Select values 4 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Expression_Matrix_column_count_result</from>
-      <to>Select values 4 3 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Expression_Matrix_column_order_result</from>
-      <to>Select values 4 2 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>FASTQ_field_name_result</from>
-      <to>Select values 4 2 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>BAM_field_name_result</from>
-      <to>Select values 4 2 3 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Expression_Matrix_field_name_result</from>
-      <to>Select values 4 2 3 2 2</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Check field count</from>
-      <to>Modified JavaScript value</to>
+      <to>Memory group by 7</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Check field order</from>
-      <to>Modified JavaScript value</to>
+      <to>Memory group by 7</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Check field names</from>
-      <to>Modified JavaScript value</to>
+      <to>Memory group by 7</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Check field order 2</from>
+      <to>Memory group by 7</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Check field count 2</from>
+      <to>Memory group by 7</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Check field names 2</from>
+      <to>Memory group by 7</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Check field count 3</from>
+      <to>Memory group by 7</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Check field order 3</from>
+      <to>Memory group by 7</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Check field names 3</from>
+      <to>Memory group by 7</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -837,32 +822,32 @@
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Check field count 2</from>
-      <to>Modified JavaScript value</to>
+      <from>Append streams 2</from>
+      <to>Memory group by 8</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Check field order 2</from>
-      <to>Modified JavaScript value</to>
+      <from>Append streams</from>
+      <to>Memory group by 8</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Check field names 2</from>
-      <to>Modified JavaScript value</to>
+      <from>Append streams 2 2</from>
+      <to>Memory group by 8</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Check field count 3</from>
-      <to>Modified JavaScript value</to>
+      <from>Memory group by 8</from>
+      <to>Merge join 5</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Check field order 3</from>
-      <to>Modified JavaScript value</to>
+      <from>Memory group by 7</from>
+      <to>Merge join 5</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Check field names 3</from>
+      <from>Merge join 5</from>
       <to>Modified JavaScript value</to>
       <enabled>Y</enabled>
     </hop>
@@ -2037,7 +2022,8 @@ var outputString = JSON.stringify(output);
 };
 
 if (PropCount != 2) {
-	output["message"] = "The following field has no match: " + Property;
+	output["message"] = "Field has no match";
+	output["fieldName"] = Property;
 	output["error"] = true;
 }
 
@@ -2094,7 +2080,8 @@ var outputString = JSON.stringify(output);
 };
 
 if (PropCount != 2) {
-	output["message"] = "The following field has no match: " + Property;
+	output["message"] = "Field has no match";
+	output["fieldName"] = Property;
 	output["error"] = true;
 }
 
@@ -2151,7 +2138,8 @@ var outputString = JSON.stringify(output);
 };
 
 if (PropCount != 2) {
-	output["message"] = "The following field has no match: " + Property;
+	output["message"] = "Field has no match";
+	output["fieldName"] = Property;
 	output["error"] = true;
 }
 
@@ -2180,7 +2168,7 @@ var outputString = JSON.stringify(output);
     </remotesteps>
     <GUI>
       <xloc>1088</xloc>
-      <yloc>1184</yloc>
+      <yloc>1152</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -5641,379 +5629,6 @@ var outputString = JSON.stringify(output);
     </GUI>
   </step>
   <step>
-    <name>Select values 4</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>RowCountExpected</name>
-        <rename>RowCountExpectedFASTQ</rename>
-      </field>
-      <field>
-        <name>RowCountReceived</name>
-        <rename>RowCountReceivedFASTQ</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1536</xloc>
-      <yloc>0</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values 4 2</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>FieldListExpected</name>
-        <rename>FieldListExpectedFASTQ</rename>
-      </field>
-      <field>
-        <name>FieldListReceived</name>
-        <rename>FieldListReceivedFASTQ</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1520</xloc>
-      <yloc>304</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values 4 3</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>RowCountExpected</name>
-        <rename>RowCountExpectedFASTQ</rename>
-      </field>
-      <field>
-        <name>RowCountReceived</name>
-        <rename>RowCountReceivedFASTQ</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1520</xloc>
-      <yloc>512</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values 4 2 2</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>FieldListExpected</name>
-        <rename>FieldListExpectedBAM</rename>
-      </field>
-      <field>
-        <name>FieldListReceived</name>
-        <rename>FieldListReceivedBAM</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1536</xloc>
-      <yloc>688</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values 4 3 2</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>RowCountExpected</name>
-        <rename>RowCountExpectedExpressionMatrix</rename>
-      </field>
-      <field>
-        <name>RowCountReceived</name>
-        <rename>RowCountReceivedExpressionMatrix</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1584</xloc>
-      <yloc>912</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values 4 2 2 2</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>FieldListExpected</name>
-        <rename>FieldListExpectedExpressionMatrix</rename>
-      </field>
-      <field>
-        <name>FieldListReceived</name>
-        <rename>FieldListReceivedExpressionMatrix</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1600</xloc>
-      <yloc>1024</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values 4 2 3</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>PropCount</name>
-        <rename>PropCountFASTQ</rename>
-      </field>
-      <field>
-        <name>Property</name>
-        <rename>PropertyFASTQ</rename>
-      </field>
-      <field>
-        <name>outputString</name>
-        <rename>outputStringFASTQ</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1520</xloc>
-      <yloc>400</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values 4 2 3 2</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>PropCount</name>
-        <rename>PropCountBAM</rename>
-      </field>
-      <field>
-        <name>Property</name>
-        <rename>PropertyBAM</rename>
-      </field>
-      <field>
-        <name>outputString</name>
-        <rename>outputStringBAM</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1536</xloc>
-      <yloc>784</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Select values 4 2 3 2 2</name>
-    <type>SelectValues</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <fields>
-      <field>
-        <name>PropCount</name>
-        <rename>PropCountExpressionMatrix</rename>
-      </field>
-      <field>
-        <name>Property</name>
-        <rename>PropertyExpressionMatrix</rename>
-      </field>
-      <field>
-        <name>outputString</name>
-        <rename>outputStringExpressionMatrix</rename>
-      </field>
-      <select_unspecified>N</select_unspecified>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1584</xloc>
-      <yloc>1152</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Modified JavaScript value</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>outputString
-
-</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>1728</xloc>
-      <yloc>496</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
     <name>BAM_column_count_result 2</name>
     <type>TextFileOutput</type>
     <description/>
@@ -6056,8 +5671,8 @@ var outputString = JSON.stringify(output);
     </file>
     <fields>
       <field>
-        <name>outputString</name>
-        <type>None</type>
+        <name>report</name>
+        <type>String</type>
         <format/>
         <currency/>
         <decimal/>
@@ -6077,8 +5692,171 @@ var outputString = JSON.stringify(output);
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1952</xloc>
-      <yloc>512</yloc>
+      <xloc>1984</xloc>
+      <yloc>592</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Memory group by 7</name>
+    <type>MemoryGroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <give_back_row>N</give_back_row>
+    <group>
+      </group>
+    <fields>
+      <field>
+        <aggregate>outputStringConcat</aggregate>
+        <subject>outputString</subject>
+        <type>CONCAT_STRING</type>
+        <valuefield>|</valuefield>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1632</xloc>
+      <yloc>592</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Modified JavaScript value</name>
+    <type>ScriptValueMod</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <compatible>N</compatible>
+    <optimizationLevel>9</optimizationLevel>
+    <jsScripts>
+      <jsScript>
+        <jsScript_type>0</jsScript_type>
+        <jsScript_name>Script 1</jsScript_name>
+        <jsScript_script>var outputArr = outputStringConcat.split("|");
+var canonicalFields = CanonicalPropertyList.split("|");
+var report = "";
+for (i = 0; i &lt; outputArr.length; i++) {
+	var outputObj = JSON.parse(outputArr[i]);
+	if (outputObj.error) {
+		if(outputObj.fieldName &amp;&amp; (canonicalFields.indexOf(outputObj.fieldName) !== -1)) {
+			report += outputObj.message + " : " +  outputObj.fieldName + "\n";
+		} else {
+			report += outputObj.message + "\n";
+		}
+	}
+}
+
+
+</jsScript_script>
+      </jsScript>
+    </jsScripts>
+    <fields>
+      <field>
+        <name>report</name>
+        <rename>report</rename>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <replace>N</replace>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1872</xloc>
+      <yloc>592</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Memory group by 8</name>
+    <type>MemoryGroupBy</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <give_back_row>N</give_back_row>
+    <group>
+      </group>
+    <fields>
+      <field>
+        <aggregate>CanonicalPropertyList</aggregate>
+        <subject>Property</subject>
+        <type>CONCAT_STRING</type>
+        <valuefield>|</valuefield>
+      </field>
+    </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1616</xloc>
+      <yloc>368</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Merge join 5</name>
+    <type>MergeJoin</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <join_type>FULL OUTER</join_type>
+    <step1>Memory group by 8</step1>
+    <step2>Memory group by 7</step2>
+    <keys_1>
+    </keys_1>
+    <keys_2>
+    </keys_2>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1744</xloc>
+      <yloc>496</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
