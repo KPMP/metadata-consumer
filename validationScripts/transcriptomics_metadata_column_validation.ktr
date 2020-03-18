@@ -1855,7 +1855,7 @@
 
 if ((RowCountExpected - RowCountReceived) !== 0) {
 	output["error"] = true;
-	output["message"] = "Expected " + RowCountExpected + " rows but received " + RowCountReceived;
+	output["message"] = "Expected " + RowCountExpected + " columns but received " + RowCountReceived;
 }
 
 var outputString = JSON.stringify(output);
@@ -1911,7 +1911,7 @@ var outputString = JSON.stringify(output);
 
 if ((RowCountExpected - RowCountReceived) !== 0) {
 	output["error"] = true;
-	output["message"] = "Expected " + RowCountExpected + " rows but received " + RowCountReceived;
+	output["message"] = "Expected " + RowCountExpected + " columns but received " + RowCountReceived;
 }
 
 var outputString = JSON.stringify(output);
@@ -1967,7 +1967,7 @@ var outputString = JSON.stringify(output);
 
 if ((RowCountExpected - RowCountReceived) !== 0) {
 	output["error"] = true;
-	output["message"] = "Expected " + RowCountExpected + " rows but received " + RowCountReceived;
+	output["message"] = "Expected " + RowCountExpected + " columns but received " + RowCountReceived;
 }
 
 var outputString = JSON.stringify(output);
@@ -5653,7 +5653,7 @@ var outputString = JSON.stringify(output);
     <fileNameField/>
     <create_parent_folder>Y</create_parent_folder>
     <file>
-      <name>${baseDirectory}/${packageDirectory}/${packageID}_test_result</name>
+      <name>${baseDirectory}/${packageDirectory}/${packageID}_validation_summary</name>
       <servlet_output>N</servlet_output>
       <do_not_open_new_file_init>N</do_not_open_new_file_init>
       <extention>txt</extention>
@@ -5692,8 +5692,8 @@ var outputString = JSON.stringify(output);
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1984</xloc>
-      <yloc>592</yloc>
+      <xloc>2000</xloc>
+      <yloc>576</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -5752,14 +5752,18 @@ var outputString = JSON.stringify(output);
         <jsScript_name>Script 1</jsScript_name>
         <jsScript_script>var outputArr = outputStringConcat.split("|");
 var canonicalFields = CanonicalPropertyList.split("|");
-var report = "";
+var report = "Transcriptomics Metdata Validation Report\n\n";
 for (i = 0; i &lt; outputArr.length; i++) {
 	var outputObj = JSON.parse(outputArr[i]);
 	if (outputObj.error) {
-		if(outputObj.fieldName &amp;&amp; (canonicalFields.indexOf(outputObj.fieldName) !== -1)) {
-			report += outputObj.message + " : " +  outputObj.fieldName + "\n";
+		if(outputObj.fieldName) {
+			if (canonicalFields.indexOf(outputObj.fieldName) !== -1) {
+				report += "Missing field: " + outputObj.fieldName + "\n";
+			} else {
+				report += "Bad field name: " + outputObj.fieldName + "\n";
+			}
 		} else {
-			report += outputObj.message + "\n";
+			report += outputObj.message + " in " + outputObj.fileType + " tab \n";
 		}
 	}
 }
@@ -5788,7 +5792,7 @@ for (i = 0; i &lt; outputArr.length; i++) {
     </remotesteps>
     <GUI>
       <xloc>1872</xloc>
-      <yloc>592</yloc>
+      <yloc>576</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
