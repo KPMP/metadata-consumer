@@ -779,7 +779,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>400</xloc>
+      <xloc>416</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -806,7 +806,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>256</xloc>
-      <yloc>144</yloc>
+      <yloc>224</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
