@@ -531,7 +531,7 @@
     <accept_stepname/>
     <file>
       <name>${baseDirectory}/${packageDirectory}</name>
-      <filemask>METADATA_.*.xlsx</filemask>
+      <filemask>${metadataFileRegex}</filemask>
       <exclude_filemask/>
       <file_required>N</file_required>
       <include_subfolders>N</include_subfolders>
@@ -702,7 +702,7 @@
     <accept_stepname/>
     <file>
       <name>${baseDirectory}/${packageDirectory}</name>
-      <filemask>METADATA_.*.xlsx</filemask>
+      <filemask>${metadataFileRegex}</filemask>
       <exclude_filemask/>
       <file_required>N</file_required>
       <include_subfolders>N</include_subfolders>
@@ -897,7 +897,7 @@
     <accept_stepname/>
     <file>
       <name>${baseDirectory}/${packageDirectory}</name>
-      <filemask>METADATA_.*.xlsx</filemask>
+      <filemask>${metadataFileRegex}</filemask>
       <exclude_filemask/>
       <file_required>N</file_required>
       <include_subfolders>N</include_subfolders>
