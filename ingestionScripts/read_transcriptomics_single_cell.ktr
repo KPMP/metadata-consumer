@@ -485,7 +485,7 @@
     <hop>
       <from>BAM Tab</from>
       <to>create_bam_metadata_json_by_file</to>
-      <enabled>N</enabled>
+      <enabled>Y</enabled>
     </hop>
     <hop>
       <from>Expression Matrix Tab</from>
