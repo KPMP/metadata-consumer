@@ -304,7 +304,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>16</xloc>
+      <xloc>80</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -342,7 +342,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>720</xloc>
+      <xloc>848</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -366,7 +366,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>896</xloc>
+      <xloc>1024</xloc>
       <yloc>128</yloc>
       <attributes_kjc/>
     </entry>
@@ -391,7 +391,7 @@
         </field>
         <field>
           <variable_name>packageID</variable_name>
-          <variable_value>fileTestingSingleNuc</variable_value>
+          <variable_value>testPackageID123</variable_value>
           <variable_type>JVM</variable_type>
         </field>
         <field>
@@ -403,7 +403,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>128</xloc>
+      <xloc>192</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -441,7 +441,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>896</xloc>
+      <xloc>1024</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -465,7 +465,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>896</xloc>
+      <xloc>1024</xloc>
       <yloc>240</yloc>
       <attributes_kjc/>
     </entry>
@@ -503,7 +503,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1088</xloc>
+      <xloc>1216</xloc>
       <yloc>240</yloc>
       <attributes_kjc/>
     </entry>
@@ -541,7 +541,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1088</xloc>
+      <xloc>1216</xloc>
       <yloc>128</yloc>
       <attributes_kjc/>
     </entry>
@@ -565,7 +565,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>896</xloc>
+      <xloc>1024</xloc>
       <yloc>352</yloc>
       <attributes_kjc/>
     </entry>
@@ -603,7 +603,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1088</xloc>
+      <xloc>1216</xloc>
       <yloc>352</yloc>
       <attributes_kjc/>
     </entry>
@@ -627,7 +627,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>896</xloc>
+      <xloc>1024</xloc>
       <yloc>448</yloc>
       <attributes_kjc/>
     </entry>
@@ -665,7 +665,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1088</xloc>
+      <xloc>1216</xloc>
       <yloc>448</yloc>
       <attributes_kjc/>
     </entry>
@@ -689,7 +689,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>896</xloc>
+      <xloc>1024</xloc>
       <yloc>544</yloc>
       <attributes_kjc/>
     </entry>
@@ -727,7 +727,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1088</xloc>
+      <xloc>1216</xloc>
       <yloc>544</yloc>
       <attributes_kjc/>
     </entry>
@@ -741,7 +741,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>560</xloc>
+      <xloc>688</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -779,7 +779,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>416</xloc>
+      <xloc>544</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -792,7 +792,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>256</xloc>
+      <xloc>448</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -805,8 +805,156 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>256</xloc>
+      <xloc>448</xloc>
       <yloc>224</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Simple evaluation</name>
+      <description/>
+      <type>SIMPLE_EVAL</type>
+      <attributes/>
+      <valuetype>variable</valuetype>
+      <fieldname/>
+      <variablename>${baseDirectory}</variablename>
+      <fieldtype>string</fieldtype>
+      <mask/>
+      <comparevalue/>
+      <minvalue/>
+      <maxvalue/>
+      <successcondition>different</successcondition>
+      <successnumbercondition>equal</successnumbercondition>
+      <successbooleancondition>false</successbooleancondition>
+      <successwhenvarset>Y</successwhenvarset>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>304</xloc>
+      <yloc>112</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Simple evaluation 2</name>
+      <description/>
+      <type>SIMPLE_EVAL</type>
+      <attributes/>
+      <valuetype>variable</valuetype>
+      <fieldname/>
+      <variablename>${packageDirectory}</variablename>
+      <fieldtype>string</fieldtype>
+      <mask/>
+      <comparevalue/>
+      <minvalue/>
+      <maxvalue/>
+      <successcondition>different</successcondition>
+      <successnumbercondition>equal</successnumbercondition>
+      <successbooleancondition>false</successbooleancondition>
+      <successwhenvarset>Y</successwhenvarset>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>304</xloc>
+      <yloc>208</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Simple evaluation 3</name>
+      <description/>
+      <type>SIMPLE_EVAL</type>
+      <attributes/>
+      <valuetype>variable</valuetype>
+      <fieldname/>
+      <variablename>${packageID}</variablename>
+      <fieldtype>string</fieldtype>
+      <mask/>
+      <comparevalue/>
+      <minvalue/>
+      <maxvalue/>
+      <successcondition>different</successcondition>
+      <successnumbercondition>equal</successnumbercondition>
+      <successbooleancondition>false</successbooleancondition>
+      <successwhenvarset>Y</successwhenvarset>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>304</xloc>
+      <yloc>320</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Simple evaluation 4</name>
+      <description/>
+      <type>SIMPLE_EVAL</type>
+      <attributes/>
+      <valuetype>variable</valuetype>
+      <fieldname>metadataFileRegex</fieldname>
+      <variablename>${metadataFileRegex}</variablename>
+      <fieldtype>string</fieldtype>
+      <mask/>
+      <comparevalue/>
+      <minvalue/>
+      <maxvalue/>
+      <successcondition>different</successcondition>
+      <successnumbercondition>equal</successnumbercondition>
+      <successbooleancondition>false</successbooleancondition>
+      <successwhenvarset>Y</successwhenvarset>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>304</xloc>
+      <yloc>448</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Abort job 2</name>
+      <description/>
+      <type>ABORT</type>
+      <attributes/>
+      <message>packageDirectory variable missing or empty</message>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>208</xloc>
+      <yloc>208</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Abort job 3</name>
+      <description/>
+      <type>ABORT</type>
+      <attributes/>
+      <message>packageID variable missing or empty</message>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>208</xloc>
+      <yloc>320</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Abort job 4</name>
+      <description/>
+      <type>ABORT</type>
+      <attributes/>
+      <message>metadataFileRegex variable missing or empty</message>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>208</xloc>
+      <yloc>448</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>Abort job 5</name>
+      <description/>
+      <type>ABORT</type>
+      <attributes/>
+      <message>baseDirectory variable missing or empty</message>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>208</xloc>
+      <yloc>112</yloc>
       <attributes_kjc/>
     </entry>
   </entries>
@@ -920,15 +1068,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Set variables</from>
-      <to>Metadata Master Exists</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
       <from>Delete file-level JSON file</from>
       <to>get_package_type</to>
       <from_nr>0</from_nr>
@@ -958,6 +1097,87 @@
     <hop>
       <from>Metadata Master Exists</from>
       <to>Abort job</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Set variables</from>
+      <to>Simple evaluation</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
+    </hop>
+    <hop>
+      <from>Simple evaluation</from>
+      <to>Simple evaluation 2</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Simple evaluation 2</from>
+      <to>Simple evaluation 3</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Simple evaluation 3</from>
+      <to>Simple evaluation 4</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Simple evaluation 4</from>
+      <to>Metadata Master Exists</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Simple evaluation</from>
+      <to>Abort job 5</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Simple evaluation 2</from>
+      <to>Abort job 2</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Simple evaluation 3</from>
+      <to>Abort job 3</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>N</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Simple evaluation 4</from>
+      <to>Abort job 4</to>
       <from_nr>0</from_nr>
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
