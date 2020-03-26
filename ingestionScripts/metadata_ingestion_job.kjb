@@ -342,7 +342,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>848</xloc>
+      <xloc>960</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -366,8 +366,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1024</xloc>
-      <yloc>128</yloc>
+      <xloc>1104</xloc>
+      <yloc>224</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -441,7 +441,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1024</xloc>
+      <xloc>1104</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -465,8 +465,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1024</xloc>
-      <yloc>240</yloc>
+      <xloc>1104</xloc>
+      <yloc>336</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -503,8 +503,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1216</xloc>
-      <yloc>240</yloc>
+      <xloc>1296</xloc>
+      <yloc>336</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -541,8 +541,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1216</xloc>
-      <yloc>128</yloc>
+      <xloc>1296</xloc>
+      <yloc>224</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -565,8 +565,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1024</xloc>
-      <yloc>352</yloc>
+      <xloc>1104</xloc>
+      <yloc>448</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -603,8 +603,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1216</xloc>
-      <yloc>352</yloc>
+      <xloc>1296</xloc>
+      <yloc>448</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -627,8 +627,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1024</xloc>
-      <yloc>448</yloc>
+      <xloc>1104</xloc>
+      <yloc>544</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -665,8 +665,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1216</xloc>
-      <yloc>448</yloc>
+      <xloc>1296</xloc>
+      <yloc>544</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -689,8 +689,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1024</xloc>
-      <yloc>544</yloc>
+      <xloc>1104</xloc>
+      <yloc>640</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -727,8 +727,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>1216</xloc>
-      <yloc>544</yloc>
+      <xloc>1296</xloc>
+      <yloc>640</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -741,7 +741,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>688</xloc>
+      <xloc>736</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -779,7 +779,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>544</xloc>
+      <xloc>608</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -792,7 +792,7 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>448</xloc>
+      <xloc>480</xloc>
       <yloc>32</yloc>
       <attributes_kjc/>
     </entry>
@@ -805,8 +805,8 @@
       <parallel>N</parallel>
       <draw>Y</draw>
       <nr>0</nr>
-      <xloc>448</xloc>
-      <yloc>224</yloc>
+      <xloc>480</xloc>
+      <yloc>208</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -957,6 +957,58 @@
       <yloc>112</yloc>
       <attributes_kjc/>
     </entry>
+    <entry>
+      <name>Delete report</name>
+      <description/>
+      <type>DELETE_FILE</type>
+      <attributes/>
+      <filename>${baseDirectory}/${packageDirectory}/${packageID}_metadata_ingestion_report.txt</filename>
+      <fail_if_file_not_exists>N</fail_if_file_not_exists>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>864</xloc>
+      <yloc>32</yloc>
+      <attributes_kjc/>
+    </entry>
+    <entry>
+      <name>metadata_ingestion_job_report</name>
+      <description/>
+      <type>TRANS</type>
+      <attributes/>
+      <specification_method>filename</specification_method>
+      <trans_object_id/>
+      <filename>${Internal.Entry.Current.Directory}/metadata_ingestion_job_report.ktr</filename>
+      <transname/>
+      <arg_from_previous>N</arg_from_previous>
+      <params_from_previous>N</params_from_previous>
+      <exec_per_row>N</exec_per_row>
+      <clear_rows>N</clear_rows>
+      <clear_files>N</clear_files>
+      <set_logfile>N</set_logfile>
+      <logfile/>
+      <logext/>
+      <add_date>N</add_date>
+      <add_time>N</add_time>
+      <loglevel>Basic</loglevel>
+      <cluster>N</cluster>
+      <slave_server_name/>
+      <set_append_logfile>N</set_append_logfile>
+      <wait_until_finished>Y</wait_until_finished>
+      <follow_abort_remote>N</follow_abort_remote>
+      <create_parent_folder>N</create_parent_folder>
+      <logging_remote_work>N</logging_remote_work>
+      <run_configuration>Pentaho local</run_configuration>
+      <parameters>
+        <pass_all_parameters>Y</pass_all_parameters>
+      </parameters>
+      <parallel>N</parallel>
+      <draw>Y</draw>
+      <nr>0</nr>
+      <xloc>1104</xloc>
+      <yloc>128</yloc>
+      <attributes_kjc/>
+    </entry>
   </entries>
   <hops>
     <hop>
@@ -975,16 +1027,7 @@
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
-      <from>get_field_mappings</from>
-      <to>Single-nucleus RNA-Seq?</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
+      <unconditional>N</unconditional>
     </hop>
     <hop>
       <from>Bulk microRNA?</from>
@@ -1065,15 +1108,6 @@
       <to_nr>0</to_nr>
       <enabled>Y</enabled>
       <evaluation>N</evaluation>
-      <unconditional>N</unconditional>
-    </hop>
-    <hop>
-      <from>Delete file-level JSON file</from>
-      <to>get_package_type</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
     </hop>
     <hop>
@@ -1183,6 +1217,42 @@
       <enabled>Y</enabled>
       <evaluation>N</evaluation>
       <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Delete file-level JSON file</from>
+      <to>Delete report</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Delete report</from>
+      <to>get_package_type</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>get_field_mappings</from>
+      <to>metadata_ingestion_job_report</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>metadata_ingestion_job_report</from>
+      <to>Single-nucleus RNA-Seq?</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
     </hop>
   </hops>
   <notepads>
