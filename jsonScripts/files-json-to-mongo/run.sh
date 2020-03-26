@@ -4,7 +4,7 @@
 # Make sure the dataLake network with mongodb is running first!
 
 realpath() {
-    [[ $2 = /* ]] && echo "$2" || echo "$PWD/${1#./}"
+    [[ $1 = /* ]] && echo "$1" || echo "$PWD/${1#./}"
 }
 
 WORKER_IMAGE=kingstonduo/files-json-to-mongo:latest
