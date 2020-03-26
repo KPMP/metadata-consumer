@@ -10,8 +10,8 @@ In order to run this you will need to:
 1) Copy .env.example to .env
 2) Update your .env to match your environment (you may not need to change anything, but verify)
 3) Ensure you have the dataLake running so it can access the dataLake mongo store
-4) ./run.sh <packageId> <metadata file path>
-    ./run.sh 007aef61-c32b-4f86-80fd-a8b498d86946 /data/package_007aef61-c32b-4f86-80fd-a8b498d86946/007aef61-c32b-4f86-80fd-a8b498d86946_metadata_per_file.json
+4) ./run.sh [packageId] [metadata file path]
+    - ./run.sh 007aef61-c32b-4f86-80fd-a8b498d86946 /data/package_007aef61-c32b-4f86-80fd-a8b498d86946/007aef61-c32b-4f86-80fd-a8b498d86946_metadata_per_file.json
 
 ## Output
 Either an error or the number of records matched and the number of records modified. 
