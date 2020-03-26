@@ -5,8 +5,6 @@ const MongoClient = require('mongodb').MongoClient;
 const fs = require('fs');
 const util = require('util');
 const readFile = util.promisify(fs.readFile);
-const DATA_DIR = '/data/';
-
 
 let constants = null;
 
@@ -113,7 +111,6 @@ function run(requiredEnvNames, loadFilesFromMetadata) {
 }
 
 module.exports = {
-  DATA_DIR,
   constants,
   init,
   fixDates,
