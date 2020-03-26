@@ -936,13 +936,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       </field>
     </group>
     <fields>
-      <field>
-        <aggregate>fileCount</aggregate>
-        <subject>fileUUID</subject>
-        <type>COUNT_ALL</type>
-        <valuefield/>
-      </field>
-    </fields>
+      </fields>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -1044,18 +1038,6 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
       <field>
         <name>Replicate ID</name>
         <type>String</type>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif/>
-        <trim_type>none</trim_type>
-        <length>-1</length>
-        <precision>-1</precision>
-      </field>
-      <field>
-        <name>fileCount</name>
-        <type>Integer</type>
         <format/>
         <currency/>
         <decimal/>
