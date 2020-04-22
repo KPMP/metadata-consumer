@@ -1057,7 +1057,7 @@
     </partitioning>
     <fieldname>packageType</fieldname>
     <use_contains>N</use_contains>
-    <case_value_type>None</case_value_type>
+    <case_value_type>String</case_value_type>
     <case_value_format/>
     <case_value_decimal/>
     <case_value_group/>
