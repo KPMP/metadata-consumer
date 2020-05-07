@@ -381,17 +381,17 @@
       <fields>
         <field>
           <variable_name>baseDirectory</variable_name>
-          <variable_value>C:\Users\zachw\Documents\KPMP</variable_value>
+          <variable_value>C:\Users\zachw\Box Sync\KPMP\DataLake</variable_value>
           <variable_type>JVM</variable_type>
         </field>
         <field>
           <variable_name>packageDirectory</variable_name>
-          <variable_value>KPMP-1628</variable_value>
+          <variable_value>efed3c64-3086-4293-b2f8-07a6d6a82193</variable_value>
           <variable_type>JVM</variable_type>
         </field>
         <field>
           <variable_name>packageID</variable_name>
-          <variable_value>testPackageID123</variable_value>
+          <variable_value>efed3c64-3086-4293-b2f8-07a6d6a82193</variable_value>
           <variable_type>JVM</variable_type>
         </field>
         <field>
