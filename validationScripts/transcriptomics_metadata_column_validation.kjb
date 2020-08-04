@@ -319,17 +319,17 @@
       <fields>
         <field>
           <variable_name>baseDirectory</variable_name>
-          <variable_value>C:\Users\zachw\Documents\KPMP</variable_value>
+          <variable_value>C:\Users\zachw\Box Sync\KPMP\DataLake</variable_value>
           <variable_type>JVM</variable_type>
         </field>
         <field>
           <variable_name>packageDirectory</variable_name>
-          <variable_value>MetadataSpreadsheets</variable_value>
+          <variable_value>e48ebcff-a2f6-40ad-8740-6ed1697be357</variable_value>
           <variable_type>JVM</variable_type>
         </field>
         <field>
           <variable_name>packageID</variable_name>
-          <variable_value>98765</variable_value>
+          <variable_value>e48ebcff-a2f6-40ad-8740-6ed1697be357</variable_value>
           <variable_type>JVM</variable_type>
         </field>
       </fields>

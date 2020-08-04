@@ -804,7 +804,7 @@
         <group/>
       </field>
       <field>
-        <name>Median Number of Raw Sequencing Reads (per cell/nucleus)</name>
+        <name>Mean Number of Raw Sequencing Reads (per cell/nucleus)</name>
         <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -999,7 +999,7 @@
         <group/>
       </field>
       <field>
-        <name>Tissue Segmention / Dissociation Date</name>
+        <name>Tissue Segmentation / Dissociation Date</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1023,7 +1023,7 @@
         <group/>
       </field>
       <field>
-        <name>Calculated Volume Dissected / Processed</name>
+        <name>Calculated Volume Dissected / Processed (mm^3)</name>
         <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1155,7 +1155,7 @@
         <group/>
       </field>
       <field>
-        <name>cDNA Library Yield</name>
+        <name>cDNA Library Yield (ng)</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1239,7 +1239,7 @@
         <group/>
       </field>
       <field>
-        <name>cDNA Quantity Loaded</name>
+        <name>cDNA Quantity Loaded (nmol)</name>
         <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>

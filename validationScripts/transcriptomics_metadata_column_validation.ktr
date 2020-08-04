@@ -5708,6 +5708,7 @@ for (i = 0; i &lt; outputArr.length; i++) {
     <fields>
       <field>
         <name>Property</name>
+        <rename/>
       </field>
       <select_unspecified>N</select_unspecified>
     </fields>
