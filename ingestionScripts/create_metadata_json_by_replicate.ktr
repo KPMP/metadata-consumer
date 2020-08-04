@@ -755,7 +755,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
     <footer>N</footer>
     <format>UNIX</format>
     <compression>None</compression>
-    <encoding>windows-1252</encoding>
+    <encoding>UTF-8</encoding>
     <endedLine/>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>
@@ -824,7 +824,7 @@ var sampleJson = JSON.stringify(sampleObj);</jsScript_script>
     <footer>N</footer>
     <format>UNIX</format>
     <compression>None</compression>
-    <encoding>windows-1252</encoding>
+    <encoding>UTF-8</encoding>
     <endedLine/>
     <fileNameInField>N</fileNameInField>
     <fileNameField/>

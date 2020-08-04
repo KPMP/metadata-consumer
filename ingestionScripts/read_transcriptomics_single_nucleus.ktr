@@ -523,14 +523,14 @@
     <sheetfield>sheetName</sheetfield>
     <filefield/>
     <limit>0</limit>
-    <encoding/>
+    <encoding>UTF-8</encoding>
     <add_to_result_filenames>Y</add_to_result_filenames>
     <accept_filenames>N</accept_filenames>
     <accept_field/>
     <accept_stepname/>
     <file>
       <name>${baseDirectory}/${packageDirectory}</name>
-      <filemask>${metdataFileRegex}</filemask>
+      <filemask>${metadataFileRegex}</filemask>
       <exclude_filemask/>
       <file_required>N</file_required>
       <include_subfolders>N</include_subfolders>
@@ -694,7 +694,7 @@
     <sheetfield>sheetName</sheetfield>
     <filefield/>
     <limit>0</limit>
-    <encoding/>
+    <encoding>UTF-8</encoding>
     <add_to_result_filenames>Y</add_to_result_filenames>
     <accept_filenames>N</accept_filenames>
     <accept_field/>
@@ -937,7 +937,7 @@
     <sheetfield/>
     <filefield/>
     <limit>0</limit>
-    <encoding/>
+    <encoding>UTF-8</encoding>
     <add_to_result_filenames>Y</add_to_result_filenames>
     <accept_filenames>N</accept_filenames>
     <accept_field/>
