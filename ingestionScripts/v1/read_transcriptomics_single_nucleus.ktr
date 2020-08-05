@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>read_transcriptomics_mrna</name>
+    <name>read_transcriptomics_single_nucleus</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -524,7 +523,7 @@
     <sheetfield>sheetName</sheetfield>
     <filefield/>
     <limit>0</limit>
-    <encoding/>
+    <encoding>UTF-8</encoding>
     <add_to_result_filenames>Y</add_to_result_filenames>
     <accept_filenames>N</accept_filenames>
     <accept_field/>
@@ -695,7 +694,7 @@
     <sheetfield>sheetName</sheetfield>
     <filefield/>
     <limit>0</limit>
-    <encoding/>
+    <encoding>UTF-8</encoding>
     <add_to_result_filenames>Y</add_to_result_filenames>
     <accept_filenames>N</accept_filenames>
     <accept_field/>
@@ -793,7 +792,31 @@
         <group/>
       </field>
       <field>
-        <name>Ribosomal Fraction</name>
+        <name>Sequencing Saturation</name>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Median Number of Raw Sequencing Reads (per cell/nucleus)</name>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Number of Cells Sequenced Post-QC</name>
         <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -806,6 +829,30 @@
       </field>
       <field>
         <name>Genes Detected</name>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Median Genes Detected (per cell/nucleus)</name>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Median UMI Detected (per cell/nucleus)</name>
         <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -890,7 +937,7 @@
     <sheetfield/>
     <filefield/>
     <limit>0</limit>
-    <encoding/>
+    <encoding>UTF-8</encoding>
     <add_to_result_filenames>Y</add_to_result_filenames>
     <accept_filenames>N</accept_filenames>
     <accept_field/>
@@ -952,8 +999,44 @@
         <group/>
       </field>
       <field>
-        <name>RNA Isolation Date</name>
+        <name>Tissue Segmention / Dissociation Date</name>
         <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Area Dissected / Processed (Square Microns)</name>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Calculated Volume Dissected / Processed</name>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Number of Cells / Nuclei Loaded</name>
+        <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -976,7 +1059,7 @@
         <group/>
       </field>
       <field>
-        <name>Bioanalyzer Date</name>
+        <name>Single Cell / Nucleus Processing Instrument</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -988,80 +1071,8 @@
         <group/>
       </field>
       <field>
-        <name>RNA Yield</name>
-        <type>Number</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-      <field>
-        <name>RNA Yield Unit</name>
+        <name>RNA Amplification Chemistry / Kit</name>
         <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-      <field>
-        <name>RNA Concentration</name>
-        <type>Number</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-      <field>
-        <name>RNA Selection Method</name>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-      <field>
-        <name>RNA Selection Method Other Specify</name>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-      <field>
-        <name>RIN Value</name>
-        <type>Number</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-      <field>
-        <name>DV200 Value</name>
-        <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1144,7 +1155,7 @@
         <group/>
       </field>
       <field>
-        <name>cDNA Library Yield (ng)</name>
+        <name>cDNA Library Yield</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1228,7 +1239,7 @@
         <group/>
       </field>
       <field>
-        <name>cDNA Quantity Loaded (nmol)</name>
+        <name>cDNA Quantity Loaded</name>
         <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1455,7 +1466,7 @@
     <name>Merge join 2</name>
     <type>MergeJoin</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>

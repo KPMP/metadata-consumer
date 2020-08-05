@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>read_transcriptomics_mrna</name>
+    <name>read_transcriptomics_sub_segmental</name>
     <description/>
     <extended_description/>
     <trans_version/>
@@ -952,8 +952,56 @@
         <group/>
       </field>
       <field>
+        <name>Tissue Segmention / Dissociation Date</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
         <name>RNA Isolation Date</name>
         <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Sub-segment / Compartment Dissected</name>
+        <type>String</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Area Dissected / Processed (Square Microns)</name>
+        <type>Number</type>
+        <length>-1</length>
+        <precision>-1</precision>
+        <trim_type>none</trim_type>
+        <repeat>N</repeat>
+        <format/>
+        <currency/>
+        <decimal/>
+        <group/>
+      </field>
+      <field>
+        <name>Calculated Volume Dissected / Processed</name>
+        <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
         <trim_type>none</trim_type>
@@ -1120,18 +1168,6 @@
         <group/>
       </field>
       <field>
-        <name>Library Fragmentation Method</name>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <trim_type>none</trim_type>
-        <repeat>N</repeat>
-        <format/>
-        <currency/>
-        <decimal/>
-        <group/>
-      </field>
-      <field>
         <name>Number of PCR Cycles cDNA</name>
         <type>Number</type>
         <length>-1</length>
@@ -1144,7 +1180,7 @@
         <group/>
       </field>
       <field>
-        <name>cDNA Library Yield (ng)</name>
+        <name>cDNA Library Yield</name>
         <type>String</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1228,7 +1264,7 @@
         <group/>
       </field>
       <field>
-        <name>cDNA Quantity Loaded (nmol)</name>
+        <name>cDNA Quantity Loaded</name>
         <type>Number</type>
         <length>-1</length>
         <precision>-1</precision>
@@ -1372,7 +1408,7 @@
     </remotesteps>
     <GUI>
       <xloc>416</xloc>
-      <yloc>160</yloc>
+      <yloc>144</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -1390,15 +1426,15 @@
     <formula>
       <field_name>repcheck1</field_name>
       <formula_string>IF(NOT(ISBLANK([Replicate ID_1]));[Replicate ID_1];[Replicate ID])</formula_string>
-      <value_type>None</value_type>
+      <value_type>String</value_type>
       <value_length>-1</value_length>
       <value_precision>-1</value_precision>
       <replace_field>Replicate ID</replace_field>
     </formula>
     <formula>
       <field_name>repcheck2</field_name>
-      <formula_string>IF(NOT(ISBLANK([Replicate ID_2]));[Replicate ID_2];[Replicate ID])</formula_string>
-      <value_type>None</value_type>
+      <formula_string>IF(NOT(ISBLANK([Replicate ID_1_1]));[Replicate ID_1_1];[Replicate ID])</formula_string>
+      <value_type>String</value_type>
       <value_length>-1</value_length>
       <value_precision>-1</value_precision>
       <replace_field>Replicate ID</replace_field>
@@ -1412,7 +1448,7 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>944</xloc>
+      <xloc>928</xloc>
       <yloc>528</yloc>
       <draw>Y</draw>
     </GUI>
@@ -1455,7 +1491,7 @@
     <name>Merge join 2</name>
     <type>MergeJoin</type>
     <description/>
-    <distribute>N</distribute>
+    <distribute>Y</distribute>
     <custom_distribution/>
     <copies>1</copies>
     <partitioning>
@@ -1463,8 +1499,8 @@
       <schema_name/>
     </partitioning>
     <join_type>FULL OUTER</join_type>
-    <step1>Sort rows 4</step1>
-    <step2>Sort rows 3</step2>
+    <step1>Sort rows 3</step1>
+    <step2>Sort rows 4</step2>
     <keys_1>
       <key>Replicate ID</key>
     </keys_1>
