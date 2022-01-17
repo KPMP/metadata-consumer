@@ -1,5 +1,5 @@
-#Data Lake Mongo to Arranger Elasticsearch Index
-##Overview
+# Data Lake Mongo to Arranger Elasticsearch Index
+## Overview
 This script is intended to migrate records from the Data Lake Mongo into Elasticsearch for Arranger to use for the portal GUI.
 It creates an index called "file", adds it to Elasticsearch, and adds all packages with "promoted: true".
 
@@ -11,7 +11,7 @@ This script expects there to be a collection named "packagePortalData" with the 
  
  This script expects that port 9200 is open on the Elasticsearch server. 
 
-##Running
+## Running
 In order to run me you will need to:
 
 1) Copy .env.example to .env
