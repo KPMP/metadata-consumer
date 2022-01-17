@@ -1,3 +1,6 @@
+# Overview
+Generates package information JSON and loads into ES for the Metadata Explorer.
+
 In order to run me you will need to:
 
 1) Copy .env.example to .env

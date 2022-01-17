@@ -1,3 +1,6 @@
+## Overview
+Generates JSON files from metadata Excel files using Pentaho. These files are intended to be loaded into the Metadata Explorer.
+
 ## Setting Up
 
 The following variables need to be set in the metadata_ingestion job:

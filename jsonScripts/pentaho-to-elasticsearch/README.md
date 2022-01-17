@@ -1,3 +1,7 @@
+## Overview
+
+Loads the JSON metadata files produced by Pentaho into the ES index used by the metadata explorer.
+
 ## Setup and Run
 
 1) Copy .env.example to .env
