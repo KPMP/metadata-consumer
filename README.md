@@ -1,6 +1,8 @@
 # metadata-consumer
 Repository to hold the Pentaho scripts used for both validation of the metadata files as well as the scripts to consume the metadata for use in the system.
 
+**NOTE: Most of these scripts are no longer used!**
+
 This repository will store the xml that defines the scripts used by Pentaho to perform the data transformations.
 
 # Contents
