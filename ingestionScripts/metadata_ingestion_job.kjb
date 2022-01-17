@@ -386,12 +386,12 @@
         </field>
         <field>
           <variable_name>packageDirectory</variable_name>
-          <variable_value>e48ebcff-a2f6-40ad-8740-6ed1697be357</variable_value>
+          <variable_value>a282d59f-45f5-4ed3-b3c1-6de9667208dd</variable_value>
           <variable_type>JVM</variable_type>
         </field>
         <field>
           <variable_name>packageID</variable_name>
-          <variable_value>e48ebcff-a2f6-40ad-8740-6ed1697be357</variable_value>
+          <variable_value>a282d59f-45f5-4ed3-b3c1-6de9667208dd</variable_value>
           <variable_type>JVM</variable_type>
         </field>
         <field>
@@ -404,7 +404,7 @@
       <draw>Y</draw>
       <nr>0</nr>
       <xloc>192</xloc>
-      <yloc>32</yloc>
+      <yloc>0</yloc>
       <attributes_kjc/>
     </entry>
     <entry>
@@ -1138,15 +1138,6 @@
       <unconditional>N</unconditional>
     </hop>
     <hop>
-      <from>Set variables</from>
-      <to>Simple evaluation</to>
-      <from_nr>0</from_nr>
-      <to_nr>0</to_nr>
-      <enabled>Y</enabled>
-      <evaluation>Y</evaluation>
-      <unconditional>Y</unconditional>
-    </hop>
-    <hop>
       <from>Simple evaluation</from>
       <to>Simple evaluation 2</to>
       <from_nr>0</from_nr>
@@ -1154,6 +1145,15 @@
       <enabled>Y</enabled>
       <evaluation>Y</evaluation>
       <unconditional>N</unconditional>
+    </hop>
+    <hop>
+      <from>Set variables</from>
+      <to>Simple evaluation</to>
+      <from_nr>0</from_nr>
+      <to_nr>0</to_nr>
+      <enabled>Y</enabled>
+      <evaluation>Y</evaluation>
+      <unconditional>Y</unconditional>
     </hop>
     <hop>
       <from>Simple evaluation 2</from>
