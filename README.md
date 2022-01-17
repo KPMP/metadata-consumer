@@ -3,6 +3,18 @@ Repository to hold the Pentaho scripts used for both validation of the metadata 
 
 This repository will store the xml that defines the scripts used by Pentaho to perform the data transformations.
 
+# Contents
+
+## ingestionScripts
+Generates JSON files from metadata Excel files using Pentaho. These files are intended to be loaded into the Metadata Explorer.
+
+## loadingScripts
+A collection of scripts to convert / load data into the Metadata Explorer, Portal Arranger, and Mongo.
+
+## validationScripts
+Pentaho scripts to validate metadata Excel files.
+
+## Running / Editing 
 You can download a free version of Pentaho from https://sourceforge.net/projects/pentaho/ to use for editing the scripts.
 
 To call the validation script on your local machine:
